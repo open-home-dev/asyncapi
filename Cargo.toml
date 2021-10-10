@@ -3,7 +3,12 @@ name = "asyncapi"
 version = "0.1.0"
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["JP Stauffert"]
+license = "MIT/Apache-2.0"
+keywords = ["asyncapi"]
+homepage = "https://gitlab.com/Tinted/asyncapi"
+repository = "https://gitlab.com/Tinted/asyncapi"
+description = "This crate aims to provide data structures that represent the AsyncAPI specification easily deserializable with serde."
 
 [dependencies]
 serde = {version = "1.0.130", features = ["derive"]}
