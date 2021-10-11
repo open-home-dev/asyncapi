@@ -1,7 +1,7 @@
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 
-use crate::{Channel, ExternalDocumentation, Info, Server, Tag};
+use crate::{Channel, Components, ExternalDocumentation, Info, Server, Tag};
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -151,7 +151,7 @@ pub struct AsyncAPI {
     channels: IndexMap<String, Channel>,
     /// An element to hold various schemas for the specification.
     #[serde(skip_serializing_if = "Option::is_none")]
-    components: Option<String>, // TODO
+    components: Option<Components>,
     /// A list of tags used by the specification with additional metadata.
     /// Each tag name in the list MUST be unique.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]

@@ -157,8 +157,8 @@ pub struct Server {
     /// server. The list of values includes alternative security requirement
     /// objects that can be used. Only one of the security requirement objects
     /// need to be satisfied to authorize a connection or operation.
-    #[serde(skip_serializing_if = "Option::is_none")] // TODO check if empty vec is sufficient
-    security: Option<Vec<SecurityRequirement>>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    security: Vec<SecurityRequirement>,
     /// A map where the keys describe the name of the protocol and the values
     /// describe protocol-specific definitions for the server.
     #[serde(skip_serializing_if = "Option::is_none")]

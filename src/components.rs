@@ -16,7 +16,7 @@ use crate::{
 ///
 /// Field Name Examples:
 ///
-/// ```
+/// ```yaml
 /// User
 /// User_1
 /// User_Name

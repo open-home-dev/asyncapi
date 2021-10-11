@@ -21,6 +21,7 @@ mod server_binding;
 mod tag;
 mod variant_or;
 
+pub use asyncapi::AsyncAPI;
 pub use channel::Channel;
 pub use channel_binding::ChannelBinding;
 pub use components::Components;
@@ -30,6 +31,7 @@ pub use example::Example;
 pub use external_documentation::ExternalDocumentation;
 pub use info::{Contact, Info, License};
 pub use message::Message;
+pub use message_binding::MessageBinding;
 pub use message_trait::MessageTrait;
 pub use operation_binding::OperationBinding;
 pub use operation_trait::OperationTrait;

@@ -1,7 +1,9 @@
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 
-use crate::{CorrelationId, Example, ExternalDocumentation, ReferenceOr, Schema, Tag};
+use crate::{
+    CorrelationId, Example, ExternalDocumentation, MessageBinding, ReferenceOr, Schema, Tag,
+};
 
 /// Describes a trait that MAY be applied to a Message Object. This object MAY contain any property from the Message Object, except payload and traits.
 /// If you're looking to apply traits to an operation, see the Operation Trait Object.
@@ -12,6 +14,12 @@ pub struct Message {
     /// Schema MUST be of type "object". It **MUST NOT** define the protocol headers.
     #[serde(skip_serializing_if = "Option::is_none")]
     headers: Option<ReferenceOr<Schema>>,
+    /// Definition of the message payload. It can be of any type
+    /// but defaults to Schema object. It must match the schema format,
+    /// including encoding type - e.g Avro should be inlined as either
+    /// a YAML or JSON object NOT a string to be parsed as YAML or JSON.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    payload: Option<serde_json::Value>, // TODO try to parse to schema
     /// Definition of the correlation ID used for message tracing or matching.
     #[serde(skip_serializing_if = "Option::is_none")]
     correlation_id: Option<ReferenceOr<CorrelationId>>,
@@ -49,7 +57,7 @@ pub struct Message {
     external_docs: Option<ExternalDocumentation>,
     /// A map where the keys describe the name of
     /// the protocol and the values describe protocol-specific definitions for the message.
-    bindings: String, // TODO
+    bindings: Option<ReferenceOr<MessageBinding>>,
     /// An array with examples of valid message objects.
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     examples: IndexMap<String, ReferenceOr<Example>>,

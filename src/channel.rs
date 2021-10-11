@@ -269,8 +269,8 @@ pub struct Operation {
     /// A definition of the message that will be published or received on
     /// this channel. `oneOf` is allowed here to specify multiple messages, however,
     /// **a message MUST be valid only against one of the referenced message objects.**
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    message: Vec<ReferenceOr<Message>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    message: Option<ReferenceOr<Message>>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
