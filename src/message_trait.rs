@@ -6,13 +6,13 @@ use crate::{
 };
 
 /// Describes a trait that MAY be applied to a
-/// [Message Object](https://www.asyncapi.com/docs/specifications/v2.1.0#messageObject).
+/// [Message Object][crate::Message].
 /// This object MAY contain any property from the
-/// [Message Object](https://www.asyncapi.com/docs/specifications/v2.1.0#messageObject),
+/// [Message Object][crate::Message],
 /// except `payload` and `traits`.
 ///
 /// If you're looking to apply traits to an operation, see the
-/// [Operation Trait Object}(https://www.asyncapi.com/docs/specifications/v2.1.0#operationTraitObject).
+/// [Operation Trait Object][crate::OperationTrait].
 ///
 /// # Examples
 ///
@@ -40,7 +40,7 @@ pub struct MessageTrait {
     correlation_id: Option<ReferenceOr<CorrelationId>>,
     /// A string containing the name of the schema format/language used to define
     /// the message payload. If omitted, implementations should parse the payload as a
-    /// [Schema object](https://www.asyncapi.com/docs/specifications/v2.1.0#schemaObject).
+    /// [Schema object][crate::Schema].
     #[serde(skip_serializing_if = "Option::is_none")]
     schema_format: Option<String>,
     /// The content type to use when encoding/decoding a message's payload.

@@ -1,4 +1,4 @@
-mod asyncapi;
+mod api;
 mod channel;
 mod channel_binding;
 mod components;
@@ -21,7 +21,7 @@ mod server_binding;
 mod tag;
 mod variant_or;
 
-pub use asyncapi::AsyncAPI;
+pub use api::AsyncAPI;
 pub use channel::Channel;
 pub use channel_binding::ChannelBinding;
 pub use components::Components;

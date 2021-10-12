@@ -1,6 +1,7 @@
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 
+// TODO copied from openapi but doesn't exist in the asyncapi spec
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct Example {
     /// Short description for the example.

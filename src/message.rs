@@ -59,8 +59,8 @@ pub struct Message {
     /// the protocol and the values describe protocol-specific definitions for the message.
     bindings: Option<ReferenceOr<MessageBinding>>,
     /// An array with examples of valid message objects.
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    examples: IndexMap<String, ReferenceOr<Example>>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    examples: Vec<Example>, // TODO try to parse better
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]

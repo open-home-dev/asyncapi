@@ -300,7 +300,7 @@ pub enum SecurityScheme {
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
-    #[serde(rename = "openIdConnect")]
+    #[serde(rename = "openIdConnect", rename_all = "camelCase")]
     OpenIdConnect {
         /// A short description for security scheme.
         /// [CommonMark syntax](https://spec.commonmark.org/)
