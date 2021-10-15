@@ -97,6 +97,12 @@ pub struct Channel {
     /// text representation.
     #[serde(skip_serializing_if = "Option::is_none")]
     description: Option<String>,
+    /// The servers on which this channel is available, specified as an optional unordered
+    /// list of names (string keys) of [Server Objects][crate::Server] defined in the
+    /// [Servers Object][crate::Server] (a map). If `servers` is absent or empty then this
+    /// channel must be available on all servers defined in the [Servers Object][crate::Server].
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    servers: Vec<String>,
     /// A definition of the SUBSCRIBE operation, which defines the messages produced
     /// by the application and sent to the channel.
     #[serde(skip_serializing_if = "Option::is_none")]

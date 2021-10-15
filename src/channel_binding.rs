@@ -15,6 +15,9 @@ pub struct ChannelBinding {
     /// Protocol-specific information for a Kafka channel.
     #[serde(skip_serializing_if = "Option::is_none")]
     kafka: Option<KafkaChannelBinding>,
+    /// Protocol-specific information for an Anypoint MQ channel.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    anypointmq: Option<AnyPointMQChannelBinding>,
     /// Protocol-specific information for an AMQP 0-9-1 channel.
     #[serde(skip_serializing_if = "Option::is_none")]
     amqp: Option<AMQPChannelBinding>,
@@ -90,6 +93,63 @@ pub struct WebsocketsChannelBinding {
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct KafkaChannelBinding {}
+
+/// The Anypoint MQ [Channel Binding Object][ChannelBinding] is defined by a
+/// [JSON Schema](https://github.com/asyncapi/bindings/blob/master/anypointmq/json_schemas/channel.json),
+/// which defines these fields.
+///
+/// Note that an Anypoint MQ exchange can only be sent to, not received from.
+/// To receive messages sent to an exchange,
+/// [an intermediary queue must be defined and bound to the exchange](https://docs.mulesoft.com/mq/mq-understanding#message-exchanges).
+/// In this bindings specification, these intermediary queues are not exposed
+/// in the AsyncAPI document. Instead, it is simply assumed that whenever
+/// messages must be received from an exchange, such an intermediary queue is
+/// involved yet invisible in the AsyncAPI document.
+///
+/// # Examples
+///
+/// The following example shows a `channels` object with two channels,
+/// the second having a channel binding object for `anypointmq`:
+///
+/// ```yaml
+/// channels:
+///   user/signup:
+///     description: |
+///       This application receives command messages from this channel about users to sign up.
+///       Minimal configuration, omitting a channel binding object.
+///     publish:
+///       #...
+///   user/signedup:
+///     description: |
+///       This application sends events to this channel about users that have signed up.
+///       Explicitly provides a channel binding object.
+///     bindings:
+///       anypointmq:
+///         destination:     user-signup-exchg
+///         destinationType: exchange
+///         bindingVersion:  '0.0.1'
+///     subscribe:
+///       #...
+/// ```
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct AnyPointMQChannelBinding {
+    /// **Optional**, defaults to the channel name. The destination (queue or exchange)
+    /// name for this channel. SHOULD only be specified if the channel name differs
+    /// from the actual destination name, such as when the channel name is not a valid
+    /// destination name in Anypoint MQ.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    destination: Option<String>,
+    /// **Optional**, defaults to `queue`. The type of destination, which MUST be
+    /// either `exchange` or `queue` or `fifo-queue`. SHOULD be specified to document
+    /// the messaging model (publish/subscribe, point-to-point, strict message
+    /// ordering) supported by this channel.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    destination_type: Option<String>,
+    /// **Optional**, defaults to `latest`. The version of this binding.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    binding_version: Option<String>,
+}
 
 /// This object contains information about the channel representation in AMQP.
 ///

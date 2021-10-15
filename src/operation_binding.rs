@@ -15,6 +15,9 @@ pub struct OperationBinding {
     /// Protocol-specific information for a Kafka operation
     #[serde(skip_serializing_if = "Option::is_none")]
     kafka: Option<KafkaOperationBinding>,
+    /// Protocol-specific information for an Anypoint MQ operation.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    anypointmq: Option<AnyPointMQOperationBinding>,
     /// Protocol-specific information for an AMPQ operation
     #[serde(skip_serializing_if = "Option::is_none")]
     amqp: Option<AMQPOperationBinding>,
@@ -132,6 +135,10 @@ pub struct KafkaOperationBinding {
     #[serde(skip_serializing_if = "Option::is_none")]
     binding_version: Option<String>,
 }
+
+/// This object MUST NOT contain any properties. Its name is reserved for future use.
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+pub struct AnyPointMQOperationBinding {}
 
 /// This object contains information about the operation representation in AMQP.
 ///

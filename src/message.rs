@@ -14,6 +14,158 @@ use crate::{
 /// -----|----------------|--------
 /// [AsyncAPI 2.2.0 Schema Object](https://www.asyncapi.com/docs/specifications/v2.2.0#schemaObject) | `application/vnd.aai.asyncapi;version=2.2.0`, `application/vnd.aai.asyncapi+json;version=2.2.0`, `application/vnd.aai.asyncapi+yaml;version=2.2.0` | This is the default when a `schemaFormat` is not provided.
 /// [JSON Schema Draft 07](https://json-schema.org/specification-links.html#draft-7) | `application/schema+json;version=draft-07`, `application/schema+yaml;version=draft-07` |
+///
+/// The following table contains a set of values that every implementation is RECOMMENDED to support.
+///
+/// NAME | ALLOWED VALUES | NOTES
+/// -----|----------------|--------
+/// [Avro 1.9.0 schema](https://avro.apache.org/docs/1.9.0/spec.html#schemas) | `application/vnd.apache.avro;version=1.9.0`, `application/vnd.apache.avro+json;version=1.9.0`, `application/vnd.apache.avro+yaml;version=1.9.0` |
+/// [OpenAPI 3.0.0 Schema Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject) | `application/vnd.oai.openapi;version=3.0.0`, `application/vnd.oai.openapi+json;version=3.0.0`, `application/vnd.oai.openapi+yaml;version=3.0.0` |
+/// [RAML 1.0 data type](https://github.com/raml-org/raml-spec/blob/master/versions/raml-10/raml-10.md/) | `application/raml+yaml;version=1.0` |
+///
+/// # Examples
+///
+/// ```json
+/// {
+///     "name": "UserSignup",
+///     "title": "User signup",
+///     "summary": "Action to sign a user up.",
+///     "description": "A longer description",
+///     "contentType": "application/json",
+///     "tags": [
+///         { "name": "user" },
+///         { "name": "signup" },
+///         { "name": "register" }
+///     ],
+///     "headers": {
+///         "type": "object",
+///         "properties": {
+///         "correlationId": {
+///             "description": "Correlation ID set by application",
+///             "type": "string"
+///         },
+///         "applicationInstanceId": {
+///             "description": "Unique identifier for a given instance of the publishing application",
+///             "type": "string"
+///         }
+///         }
+///     },
+///     "payload": {
+///         "type": "object",
+///         "properties": {
+///         "user": {
+///             "$ref": "#/components/schemas/userCreate"
+///         },
+///         "signup": {
+///             "$ref": "#/components/schemas/signup"
+///         }
+///         }
+///     },
+///     "correlationId": {
+///         "description": "Default Correlation ID",
+///         "location": "$message.header#/correlationId"
+///     },
+///     "traits": [
+///         { "$ref": "#/components/messageTraits/commonHeaders" }
+///     ],
+///     "examples": [
+///         {
+///         "name": "SimpleSignup",
+///         "summary": "A simple UserSignup example message",
+///         "headers": {
+///             "correlationId": "my-correlation-id",
+///             "applicationInstanceId": "myInstanceId"
+///         },
+///         "payload": {
+///             "user": {
+///             "someUserKey": "someUserValue"
+///             },
+///             "signup": {
+///             "someSignupKey": "someSignupValue"
+///             }
+///         }
+///         }
+///     ]
+/// }
+/// ```
+///
+/// ```yaml
+/// name: UserSignup
+/// title: User signup
+/// summary: Action to sign a user up.
+/// description: A longer description
+/// contentType: application/json
+/// tags:
+///   - name: user
+///   - name: signup
+///   - name: register
+/// headers:
+///   type: object
+///   properties:
+///     correlationId:
+///       description: Correlation ID set by application
+///       type: string
+///     applicationInstanceId:
+///       description: Unique identifier for a given instance of the publishing application
+///       type: string
+/// payload:
+///   type: object
+///   properties:
+///     user:
+///       $ref: "#/components/schemas/userCreate"
+///     signup:
+///       $ref: "#/components/schemas/signup"
+/// correlationId:
+///   description: Default Correlation ID
+///   location: $message.header#/correlationId
+/// traits:
+///   - $ref: "#/components/messageTraits/commonHeaders"
+/// examples:
+///   - name: SimpleSignup
+///     summary: A simple UserSignup example message
+///     headers:
+///       correlationId: my-correlation-id
+///       applicationInstanceId: myInstanceId
+///     payload:
+///       user:
+///         someUserKey: someUserValue
+///       signup:
+///         someSignupKey: someSignupValue
+/// ```
+///
+/// Example using Avro to define the payload:
+///
+/// ```json
+/// {
+///     "name": "UserSignup",
+///     "title": "User signup",
+///     "summary": "Action to sign a user up.",
+///     "description": "A longer description",
+///     "tags": [
+///         { "name": "user" },
+///         { "name": "signup" },
+///         { "name": "register" }
+///     ],
+///     "schemaFormat": "application/vnd.apache.avro+json;version=1.9.0",
+///     "payload": {
+///         "$ref": "path/to/user-create.avsc#/UserCreate"
+///     }
+/// }
+/// ```
+///
+/// ```yaml
+/// name: UserSignup
+/// title: User signup
+/// summary: Action to sign a user up.
+/// description: A longer description
+/// tags:
+///   - name: user
+///   - name: signup
+///   - name: register
+/// schemaFormat: 'application/vnd.apache.avro+yaml;version=1.9.0'
+/// payload:
+///   $ref: 'path/to/user-create.avsc/#UserCreate'
+/// ```
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Message {

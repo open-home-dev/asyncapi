@@ -15,6 +15,9 @@ pub struct MessageBinding {
     /// Protocol-specific information for a Kafka message.
     #[serde(skip_serializing_if = "Option::is_none")]
     kafka: Option<KafkaMessageBinding>,
+    /// Protocol-specific information for an Anypoint MQ message.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    anypointmq: Option<AnyPointMQMessageBinding>,
     /// Protocol-specific information for an AMQP 0-9-1 message.
     #[serde(skip_serializing_if = "Option::is_none")]
     amqp: Option<AMQPMessageBinding>,
@@ -102,6 +105,66 @@ pub struct KafkaMessageBinding {
     #[serde(skip_serializing_if = "Option::is_none")]
     key: Option<Schema>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    binding_version: Option<String>,
+}
+
+/// The Anypoint MQ [Message Binding Object][MessageBinding] is defined by a
+/// [JSON Schema](https://github.com/asyncapi/bindings/blob/master/anypointmq/json_schemas/message.json),
+/// which defines these fields.
+///
+/// Note that application headers must be specified in the
+/// [`headers` field of the standard Message Object](https://github.com/asyncapi/spec/blob/master/spec/asyncapi.md#messageObjectHeaders)
+/// and are transmitted in the
+/// [`properties` section of the Anypoint MQ message](https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4490-82a7-23abe036327a.anypoint-platform/anypoint-mq-broker/).
+/// In contrast, protocol headers such as `messageId` must be specified in the
+/// [`headers` field of the message binding object](https://github.com/asyncapi/bindings/blob/master/anypointmq/README.md#messageBindingObjectHeaders)
+/// and are transmitted in the [`headers` section of the Anypoint MQ message](https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4490-82a7-23abe036327a.anypoint-platform/anypoint-mq-broker/).
+///
+/// # Examples
+///
+/// The following example shows a `channels` object with two channels, each having one operation (`subscribe` or `publish`) with one message. Only the message of the `subscribe` operation has a message binding object for `anypointmq`:
+///
+/// ```yaml
+/// channels:
+///   user/signup:
+///     publish:
+///       message:
+///         #...
+///   user/signedup:
+///     subscribe:
+///       message:
+///         headers:
+///           type: object
+///           properties:
+///             correlationId:
+///               description: Correlation ID set by application
+///               type: string
+///         payload:
+///           type: object
+///           properties:
+///             #...
+///         correlationId:
+///           description: Correlation ID is specified as a header and transmitted in the Anypoint MQ message properties section
+///           location:    $message.header#/correlationId
+///         bindings:
+///           anypointmq:
+///             headers:
+///               type: object
+///               properties:
+///                 messageId:
+///                   type: string
+///             bindingVersion: '0.0.1'
+/// ```
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct AnyPointMQMessageBinding {
+    /// **Optional**. A Schema object containing the definitions for Anypoint MQ-specific headers
+    /// (so-called protocol headers). This schema MUST be of type object and have a properties key.
+    /// Examples of Anypoint MQ protocol headers are messageId and messageGroupId.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    headers: Option<Schema>,
+    /// **Optional**, defaults to `latest`. The version of this binding.
     #[serde(skip_serializing_if = "Option::is_none")]
     binding_version: Option<String>,
 }

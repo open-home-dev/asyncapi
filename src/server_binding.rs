@@ -14,6 +14,9 @@ pub struct ServerBinding {
     /// Protocol-specific information for a Kafka server.
     #[serde(skip_serializing_if = "Option::is_none")]
     kafka: Option<KafkaServerBinding>,
+    /// Protocol-specific information for an Anypoint MQ server.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    anypointmq: Option<AnyPointMQServerBinding>,
     /// Protocol-specific information for an AMQP 0-9-1 server.
     #[serde(skip_serializing_if = "Option::is_none")]
     amqp: Option<AMPQServerBinding>,
@@ -67,6 +70,10 @@ pub struct WebsocketsServerBinding {}
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct KafkaServerBinding {}
+
+/// This object MUST NOT contain any properties. Its name is reserved for future use.
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+pub struct AnyPointMQServerBinding {}
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
