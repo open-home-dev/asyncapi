@@ -3,6 +3,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::{Channel, Components, ExternalDocumentation, Info, Server, Tag};
 
+/// This is the root document object for the API specification.
+/// It combines resource listing and API declaration together into one document.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct AsyncAPI {
@@ -31,7 +33,7 @@ pub struct AsyncAPI {
     /// with operations of tooling developed to a lower minor version. Thus a
     /// hypothetical `1.1.0` specification should be usable with tooling
     /// designed for `1.0.0`.
-    asyncapi: String,
+    pub asyncapi: String,
     /// Identifier of the
     /// [application](https://www.asyncapi.com/docs/specifications/v2.1.0#definitionsApplication)
     /// the AsyncAPI document is defining.
@@ -67,14 +69,14 @@ pub struct AsyncAPI {
     /// id: 'https://github.com/smartylighting/streetlights-server'
     /// ```
     #[serde(skip_serializing_if = "Option::is_none")]
-    id: Option<String>,
+    pub id: Option<String>,
     /// **Required.** Provides metadata about the API.
     /// The metadata can be used by the clients if needed.
-    info: Info,
+    pub info: Info,
     /// Provides connection details of servers.
     ///
     /// The Servers Object is a map of
-    /// [Server Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#serverObject).
+    /// [Server Objects][crate::Server].
     ///
     /// # Examples
     /// ```json
@@ -96,7 +98,7 @@ pub struct AsyncAPI {
     ///     protocolVersion: '1.0.0'
     /// ```
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    servers: IndexMap<String, Server>,
+    pub servers: IndexMap<String, Server>,
     /// Default content type to use when encoding/decoding a message's payload.
     /// A string representing the default content type to use when encoding/decoding a
     /// message's payload. The value MUST be a specific media type (e.g. `application/json`).
@@ -117,7 +119,7 @@ pub struct AsyncAPI {
     /// defaultContentType: application/json
     /// ```
     #[serde(skip_serializing_if = "Option::is_none")]
-    default_content_type: Option<String>,
+    pub default_content_type: Option<String>,
     /// **Required** The available channels and messages for the API.
     ///
     /// Holds the relative paths to the individual channel and their operations.
@@ -148,17 +150,17 @@ pub struct AsyncAPI {
     ///   subscribe:
     ///     $ref: "#/components/messages/userSignedUp"
     /// ```
-    channels: IndexMap<String, Channel>,
+    pub channels: IndexMap<String, Channel>,
     /// An element to hold various schemas for the specification.
     #[serde(skip_serializing_if = "Option::is_none")]
-    components: Option<Components>,
+    pub components: Option<Components>,
     /// A list of tags used by the specification with additional metadata.
     /// Each tag name in the list MUST be unique.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    tags: Vec<Tag>,
+    pub tags: Vec<Tag>,
     /// Additional external documentation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    external_docs: Option<ExternalDocumentation>,
+    pub external_docs: Option<ExternalDocumentation>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]

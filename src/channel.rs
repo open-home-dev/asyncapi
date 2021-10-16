@@ -91,26 +91,26 @@ pub struct Channel {
     /// definition, the behavior is *undefined*.
     #[serde(rename = "$ref")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    reference: Option<String>,
+    pub reference: Option<String>,
     /// An optional description of this channel item.
     /// [CommonMark syntax](https://spec.commonmark.org/) can be used for rich
     /// text representation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    description: Option<String>,
+    pub description: Option<String>,
     /// The servers on which this channel is available, specified as an optional unordered
     /// list of names (string keys) of [Server Objects][crate::Server] defined in the
     /// [Servers Object][crate::Server] (a map). If `servers` is absent or empty then this
     /// channel must be available on all servers defined in the [Servers Object][crate::Server].
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    servers: Vec<String>,
+    pub servers: Vec<String>,
     /// A definition of the SUBSCRIBE operation, which defines the messages produced
     /// by the application and sent to the channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    subscribe: Option<Operation>,
+    pub subscribe: Option<Operation>,
     /// A definition of the PUBLISH operation, which defines the messages consumed
     /// by the application from the channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    publish: Option<Operation>,
+    pub publish: Option<Operation>,
     /// A map of the parameters included in the channel name. It SHOULD be present only
     /// when using channels with expressions (as defined by
     /// [RFC 6570 section 2.2](https://tools.ietf.org/html/rfc6570#section-2.2)).
@@ -150,11 +150,11 @@ pub struct Channel {
     ///     $ref: "#/components/messages/userSignedUp"
     /// ```
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    parameters: IndexMap<String, ReferenceOr<Parameter>>,
+    pub parameters: IndexMap<String, ReferenceOr<Parameter>>,
     /// A map where the keys describe the name of the protocol and the values
     /// describe protocol-specific definitions for the channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    bindings: Option<ReferenceOr<ChannelBinding>>,
+    pub bindings: Option<ReferenceOr<ChannelBinding>>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
@@ -246,37 +246,37 @@ pub struct Channel {
 pub struct Operation {
     /// Unique string used to identify the operation. The id MUST be unique among all operations described in the API. The operationId value is case-sensitive. Tools and libraries MAY use the operationId to uniquely identify an operation, therefore, it is RECOMMENDED to follow common programming naming conventions.
     #[serde(skip_serializing_if = "Option::is_none")]
-    operation_id: Option<String>,
+    pub operation_id: Option<String>,
     /// A short summary of what the operation is about.
     #[serde(skip_serializing_if = "Option::is_none")]
-    summary: Option<String>,
+    pub summary: Option<String>,
     /// A verbose explanation of the operation.
     /// [CommonMark syntax](https://spec.commonmark.org/)
     /// can be used for rich text representation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    description: Option<String>,
+    pub description: Option<String>,
     /// A list of tags for API documentation control.
     /// Tags can be used for logical grouping of operations.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    tags: Vec<Tag>,
+    pub tags: Vec<Tag>,
     /// Additional external documentation for this operation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    external_docs: Option<ExternalDocumentation>,
+    pub external_docs: Option<ExternalDocumentation>,
     /// A map where the keys describe the name of the protocol and the
     /// values describe protocol-specific definitions for the operation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    bindings: Option<ReferenceOr<OperationBinding>>,
+    pub bindings: Option<ReferenceOr<OperationBinding>>,
     /// A list of traits to apply to the operation object.
     /// Traits MUST be merged into the operation object using the
     /// [JSON Merge Patch](https://tools.ietf.org/html/rfc7386)
     /// algorithm in the same order they are defined here.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    traits: Vec<ReferenceOr<OperationTrait>>,
+    pub traits: Vec<ReferenceOr<OperationTrait>>,
     /// A definition of the message that will be published or received on
     /// this channel. `oneOf` is allowed here to specify multiple messages, however,
     /// **a message MUST be valid only against one of the referenced message objects.**
     #[serde(skip_serializing_if = "Option::is_none")]
-    message: Option<ReferenceOr<Message>>,
+    pub message: Option<ReferenceOr<Message>>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]

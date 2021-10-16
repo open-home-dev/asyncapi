@@ -37,26 +37,26 @@ pub struct OperationTrait {
     /// Tools and libraries MAY use the operationId to uniquely identify an operation,
     /// therefore, it is RECOMMENDED to follow common programming naming conventions.
     #[serde(skip_serializing_if = "Option::is_none")]
-    operation_id: Option<String>,
+    pub operation_id: Option<String>,
     /// A short summary of what the operation is about.
     #[serde(skip_serializing_if = "Option::is_none")]
-    summary: Option<String>,
+    pub summary: Option<String>,
     /// A verbose explanation of the operation.
     /// [CommonMark syntax](https://spec.commonmark.org/)
     /// can be used for rich text representation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    description: Option<String>,
+    pub description: Option<String>,
     /// A list of tags for API documentation control.
     /// Tags can be used for logical grouping of operations.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    tags: Vec<Tag>,
+    pub tags: Vec<Tag>,
     /// Additional external documentation for this operation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    external_docs: Option<ExternalDocumentation>,
+    pub external_docs: Option<ExternalDocumentation>,
     /// A map where the keys describe the name of the protocol and the values describe
     /// protocol-specific definitions for the operation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    bindings: Option<ReferenceOr<OperationBinding>>,
+    pub bindings: Option<ReferenceOr<OperationBinding>>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]

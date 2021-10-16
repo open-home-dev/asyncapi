@@ -371,16 +371,16 @@ pub enum SecurityScheme {
 pub struct OAuthFlows {
     /// Configuration for the OAuth Implicit flow
     #[serde(skip_serializing_if = "Option::is_none")]
-    implicit: Option<OAuthFlowImplicit>,
+    pub implicit: Option<OAuthFlowImplicit>,
     /// Configuration for the OAuth Resource Owner Protected Credentials flow
     #[serde(skip_serializing_if = "Option::is_none")]
-    password: Option<OAuthFlowPassword>,
+    pub password: Option<OAuthFlowPassword>,
     /// Configuration for the OAuth Client Credentials flow.
     #[serde(skip_serializing_if = "Option::is_none")]
-    client_credentials: Option<OAuthFlowClientCredentials>,
+    pub client_credentials: Option<OAuthFlowClientCredentials>,
     /// Configuration for the OAuth Authorization Code flow.
     #[serde(skip_serializing_if = "Option::is_none")]
-    authorization_code: Option<OAuthFlowAuthorizationCode>,
+    pub authorization_code: Option<OAuthFlowAuthorizationCode>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
@@ -393,14 +393,14 @@ pub struct OAuthFlows {
 pub struct OAuthFlowImplicit {
     /// **REQUIRED**. The authorization URL to be used for this flow.
     /// This MUST be in the form of a URL.
-    authorization_url: String,
+    pub authorization_url: String,
     /// The URL to be used for obtaining refresh tokens.
     /// This MUST be in the form of a URL.
     #[serde(skip_serializing_if = "Option::is_none")]
-    refresh_url: Option<String>,
+    pub refresh_url: Option<String>,
     /// **REQUIRED**. The available scopes for the OAuth2 security scheme.
     /// A map between the scope name and a short description for it.
-    scopes: IndexMap<String, String>,
+    pub scopes: IndexMap<String, String>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
@@ -413,14 +413,14 @@ pub struct OAuthFlowImplicit {
 pub struct OAuthFlowPassword {
     /// **REQUIRED**. The token URL to be used for this flow.
     /// This MUST be in the form of a URL.
-    token_url: String,
+    pub token_url: String,
     /// The URL to be used for obtaining refresh tokens.
     /// This MUST be in the form of a URL.
     #[serde(skip_serializing_if = "Option::is_none")]
-    refresh_url: Option<String>,
+    pub refresh_url: Option<String>,
     /// **REQUIRED**. The available scopes for the OAuth2 security scheme.
     /// A map between the scope name and a short description for it.
-    scopes: IndexMap<String, String>,
+    pub scopes: IndexMap<String, String>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
@@ -433,14 +433,14 @@ pub struct OAuthFlowPassword {
 pub struct OAuthFlowClientCredentials {
     /// **REQUIRED**. The token URL to be used for this flow.
     /// This MUST be in the form of a URL.
-    token_url: String,
+    pub token_url: String,
     /// The URL to be used for obtaining refresh tokens.
     /// This MUST be in the form of a URL.
     #[serde(skip_serializing_if = "Option::is_none")]
-    refresh_url: Option<String>,
+    pub refresh_url: Option<String>,
     /// **REQUIRED**. The available scopes for the OAuth2 security scheme.
     /// A map between the scope name and a short description for it.
-    scopes: IndexMap<String, String>,
+    pub scopes: IndexMap<String, String>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
@@ -453,17 +453,17 @@ pub struct OAuthFlowClientCredentials {
 pub struct OAuthFlowAuthorizationCode {
     /// **REQUIRED**. The authorization URL to be used for this flow.
     /// This MUST be in the form of a URL.
-    authorization_url: String,
+    pub authorization_url: String,
     /// **REQUIRED**. The token URL to be used for this flow.
     /// This MUST be in the form of a URL.
-    token_url: String,
+    pub token_url: String,
     /// The URL to be used for obtaining refresh tokens.
     /// This MUST be in the form of a URL.
     #[serde(skip_serializing_if = "Option::is_none")]
-    refresh_url: Option<String>,
+    pub refresh_url: Option<String>,
     /// **REQUIRED**. The available scopes for the OAuth2 security scheme.
     /// A map between the scope name and a short description for it.
-    scopes: IndexMap<String, String>,
+    pub scopes: IndexMap<String, String>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]

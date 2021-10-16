@@ -11,9 +11,9 @@ pub struct CorrelationId {
     /// [CommonMark syntax](https://spec.commonmark.org/)
     /// can be used for rich text representation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    description: Option<String>,
+    pub description: Option<String>,
     /// **REQUIRED**. A runtime expression that specifies the location of the correlation ID.
-    location: String,
+    pub location: String,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]

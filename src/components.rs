@@ -187,47 +187,47 @@ pub struct Components {
     /// An object to hold reusable
     /// [Schema Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#schemaObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    schemas: IndexMap<String, ReferenceOr<Schema>>,
+    pub schemas: IndexMap<String, ReferenceOr<Schema>>,
     /// An object to hold reusable
     /// [Message Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#messageObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    messages: IndexMap<String, ReferenceOr<Message>>,
+    pub messages: IndexMap<String, ReferenceOr<Message>>,
     /// An object to hold reusable
     /// [Security Scheme Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#securitySchemeObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    security_schemes: IndexMap<String, ReferenceOr<SecurityScheme>>,
+    pub security_schemes: IndexMap<String, ReferenceOr<SecurityScheme>>,
     /// An object to hold reusable
     /// [Parameter Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#parameterObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    parameters: IndexMap<String, ReferenceOr<Parameter>>,
+    pub parameters: IndexMap<String, ReferenceOr<Parameter>>,
     /// An object to hold reusable
     /// [Correlation ID Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#correlationIdObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    correlation_ids: IndexMap<String, ReferenceOr<CorrelationId>>,
+    pub correlation_ids: IndexMap<String, ReferenceOr<CorrelationId>>,
     /// An object to hold reusable
     /// [Operation Trait Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#operationTraitObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    operation_traits: IndexMap<String, ReferenceOr<OperationTrait>>,
+    pub operation_traits: IndexMap<String, ReferenceOr<OperationTrait>>,
     /// An object to hold reusable
     /// [Message Trait Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#messageTraitObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    message_traits: IndexMap<String, ReferenceOr<MessageTrait>>,
+    pub message_traits: IndexMap<String, ReferenceOr<MessageTrait>>,
     /// An object to hold reusable
     /// [Server Bindings Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#serverBindingsObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    server_bindings: IndexMap<String, ReferenceOr<ServerBinding>>,
+    pub server_bindings: IndexMap<String, ReferenceOr<ServerBinding>>,
     /// An object to hold reusable
     /// [Channel Bindings Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#channelBindingsObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    channel_bindings: IndexMap<String, ReferenceOr<ChannelBinding>>,
+    pub channel_bindings: IndexMap<String, ReferenceOr<ChannelBinding>>,
     /// An object to hold reusable
     /// [Operation Bindings Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#operationBindingsObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    operation_bindings: IndexMap<String, ReferenceOr<OperationBinding>>,
+    pub operation_bindings: IndexMap<String, ReferenceOr<OperationBinding>>,
     /// An object to hold reusable
     /// [Message Bindings Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#messageBindingsObject).
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    message_bindings: IndexMap<String, ReferenceOr<MessageBinding>>,
+    pub message_bindings: IndexMap<String, ReferenceOr<MessageBinding>>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]

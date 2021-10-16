@@ -133,36 +133,36 @@ pub struct Server {
     /// relative to the location where the AsyncAPI document is being served.
     /// Variable substitutions will be made when a variable is named in
     /// `{`brackets`}`.
-    url: String,
+    pub url: String,
     /// **REQUIRED.** The protocol this URL supports for connection.
     /// Supported protocol include, but are not limited to:
     /// `amqp`, `amqps`, `http`, `https`, `ibmmq`, `jms`, `kafka`,
     /// `kafka-secure`, `mqtt`, `secure-mqtt`, `stomp`, `stomps`, `ws`,
     /// `wss`, `mercure`.
-    protocol: String,
+    pub protocol: String,
     /// The version of the protocol used for connection.
     /// For instance: AMQP `0.9.1`, HTTP `2.0`, Kafka `1.0.0`, etc.
     #[serde(skip_serializing_if = "Option::is_none")]
-    protocol_version: Option<String>,
+    pub protocol_version: Option<String>,
     /// An optional string describing the host designated by the URL.
     /// [CommonMark syntax](https://spec.commonmark.org/) MAY be used
     /// for rich text representation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    description: Option<String>,
+    pub description: Option<String>,
     /// A map between a variable name and its value. The value is used
     /// for substitution in the server's URL template.
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    variables: IndexMap<String, ServerVariable>,
+    pub variables: IndexMap<String, ServerVariable>,
     /// A declaration of which security mechanisms can be used with this
     /// server. The list of values includes alternative security requirement
     /// objects that can be used. Only one of the security requirement objects
     /// need to be satisfied to authorize a connection or operation.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    security: Vec<SecurityRequirement>,
+    pub security: Vec<SecurityRequirement>,
     /// A map where the keys describe the name of the protocol and the values
     /// describe protocol-specific definitions for the server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    bindings: Option<ReferenceOr<ServerBinding>>,
+    pub bindings: Option<ReferenceOr<ServerBinding>>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
@@ -177,19 +177,19 @@ pub struct ServerVariable {
     /// An enumeration of string values to be used if the substitution options are from a limited set.
     #[serde(rename = "enum")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    en: Option<Vec<String>>,
+    pub en: Option<Vec<String>>,
     /// The default value to use for substitution, and to send,
     /// if an alternate value is not supplied.
     #[serde(skip_serializing_if = "Option::is_none")]
-    default: Option<String>,
+    pub default: Option<String>,
     /// An optional description for the server variable.
     /// [CommonMark syntax](https://spec.commonmark.org/)
     /// MAY be used for rich text representation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    description: Option<String>,
+    pub description: Option<String>,
     /// An array of examples of the server variable.
     #[serde(skip_serializing_if = "Option::is_none")]
-    examples: Option<Vec<String>>,
+    pub examples: Option<Vec<String>>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]

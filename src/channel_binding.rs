@@ -8,52 +8,52 @@ use crate::Schema;
 pub struct ChannelBinding {
     /// Protocol-specific information for an HTTP channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    http: Option<HTTPChannelBinding>,
+    pub http: Option<HTTPChannelBinding>,
     /// Protocol-specific information for a WebSockets channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    ws: Option<WebsocketsChannelBinding>,
+    pub ws: Option<WebsocketsChannelBinding>,
     /// Protocol-specific information for a Kafka channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    kafka: Option<KafkaChannelBinding>,
+    pub kafka: Option<KafkaChannelBinding>,
     /// Protocol-specific information for an Anypoint MQ channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    anypointmq: Option<AnyPointMQChannelBinding>,
+    pub anypointmq: Option<AnyPointMQChannelBinding>,
     /// Protocol-specific information for an AMQP 0-9-1 channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    amqp: Option<AMQPChannelBinding>,
+    pub amqp: Option<AMQPChannelBinding>,
     /// Protocol-specific information for an AMQP 1.0 channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    amqp1: Option<AMQPChannelBinding>,
+    pub amqp1: Option<AMQPChannelBinding>,
     /// Protocol-specific information for an MQTT channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mqtt: Option<MQTTChannelBinding>,
+    pub mqtt: Option<MQTTChannelBinding>,
     /// Protocol-specific information for an MQTT 5 channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mqtt5: Option<MQTT5ChannelBinding>,
+    pub mqtt5: Option<MQTT5ChannelBinding>,
     /// Protocol-specific information for a NATS channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    nats: Option<NATSChannelBinding>,
+    pub nats: Option<NATSChannelBinding>,
     /// Protocol-specific information for a JMS channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    jms: Option<JMSChannelBinding>,
+    pub jms: Option<JMSChannelBinding>,
     /// Protocol-specific information for an SNS channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    sns: Option<SNSChannelBinding>,
+    pub sns: Option<SNSChannelBinding>,
     /// Protocol-specific information for an SQS channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    sqs: Option<SQSChannelBinding>,
+    pub sqs: Option<SQSChannelBinding>,
     /// Protocol-specific information for a STOMP channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    stomp: Option<STOMPChannelBinding>,
+    pub stomp: Option<STOMPChannelBinding>,
     /// Protocol-specific information for a Redis channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    redis: Option<RedisChannelBinding>,
+    pub redis: Option<RedisChannelBinding>,
     /// Protocol-specific information for a Mercure channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mercure: Option<MercureChannelBinding>,
+    pub mercure: Option<MercureChannelBinding>,
     /// Protocol-specific information for an IBM MQ channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    ibmmq: Option<IBMMQChannelBinding>,
+    pub ibmmq: Option<IBMMQChannelBinding>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
@@ -75,19 +75,19 @@ pub struct WebsocketsChannelBinding {
     /// The HTTP method to use when establishing the connection.
     /// Its value MUST be either `GET` or `POST`.
     #[serde(skip_serializing_if = "Option::is_none")]
-    method: Option<String>,
+    pub method: Option<String>,
     /// A Schema object containing the definitions for each query parameter.
     /// This schema MUST be of type `object` and have a `properties` key.
     #[serde(skip_serializing_if = "Option::is_none")]
-    query: Option<Schema>,
+    pub query: Option<Schema>,
     /// A Schema object containing the definitions of the HTTP headers to use when
     /// establishing the connection. This schema MUST be of type `object` and have
     /// a `properties` key.
     #[serde(skip_serializing_if = "Option::is_none")]
-    headers: Option<Schema>,
+    pub headers: Option<Schema>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
@@ -139,16 +139,16 @@ pub struct AnyPointMQChannelBinding {
     /// from the actual destination name, such as when the channel name is not a valid
     /// destination name in Anypoint MQ.
     #[serde(skip_serializing_if = "Option::is_none")]
-    destination: Option<String>,
+    pub destination: Option<String>,
     /// **Optional**, defaults to `queue`. The type of destination, which MUST be
     /// either `exchange` or `queue` or `fifo-queue`. SHOULD be specified to document
     /// the messaging model (publish/subscribe, point-to-point, strict message
     /// ordering) supported by this channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    destination_type: Option<String>,
+    pub destination_type: Option<String>,
     /// **Optional**, defaults to `latest`. The version of this binding.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object contains information about the channel representation in AMQP.
@@ -181,16 +181,16 @@ pub struct AnyPointMQChannelBinding {
 pub struct AMQPChannelBinding {
     /// Defines what type of channel is it. Can be either `queue` or `routingKey` (default).
     #[serde(skip_serializing_if = "Option::is_none")]
-    is: Option<String>,
+    pub is: Option<String>,
     /// When `is`=`routingKey`, this object defines the exchange properties.
     #[serde(skip_serializing_if = "Option::is_none")]
-    exchange: Option<AMQPChannelBindingExchange>,
+    pub exchange: Option<AMQPChannelBindingExchange>,
     /// When `is`=`queue`, this object defines the queue properties.
     #[serde(skip_serializing_if = "Option::is_none")]
-    queue: Option<AMQPChannelBindingQueue>,
+    pub queue: Option<AMQPChannelBindingQueue>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
@@ -198,20 +198,20 @@ pub struct AMQPChannelBinding {
 pub struct AMQPChannelBindingExchange {
     /// The name of the exchange. It MUST NOT exceed 255 characters long.
     #[serde(skip_serializing_if = "Option::is_none")]
-    name: Option<String>,
+    pub name: Option<String>,
     /// The type of the exchange. Can be either
     /// `topic`, `direct`, `fanout`, `default` or `headers`.
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    typ: Option<String>,
+    pub typ: Option<String>,
     /// Whether the exchange should survive broker restarts or not.
     #[serde(skip_serializing_if = "Option::is_none")]
-    durable: Option<bool>,
+    pub durable: Option<bool>,
     /// Whether the exchange should be deleted when the last queue is unbound from it.
     #[serde(skip_serializing_if = "Option::is_none")]
-    auto_delete: Option<bool>,
+    pub auto_delete: Option<bool>,
     /// The virtual host of the exchange. Defaults to `/`.
     #[serde(skip_serializing_if = "Option::is_none")]
-    vhost: Option<String>,
+    pub vhost: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
@@ -219,19 +219,19 @@ pub struct AMQPChannelBindingExchange {
 pub struct AMQPChannelBindingQueue {
     /// The name of the queue. It MUST NOT exceed 255 characters long.
     #[serde(skip_serializing_if = "Option::is_none")]
-    name: Option<String>,
+    pub name: Option<String>,
     /// Whether the queue should survive broker restarts or not.
     #[serde(skip_serializing_if = "Option::is_none")]
-    durable: Option<bool>,
+    pub durable: Option<bool>,
     /// Whether the queue should be used only by one connection or not.
     #[serde(skip_serializing_if = "Option::is_none")]
-    exclusive: Option<bool>,
+    pub exclusive: Option<bool>,
     ///  Whether the queue should be deleted when the last consumer unsubscribes.
     #[serde(skip_serializing_if = "Option::is_none")]
-    auto_delete: Option<bool>,
+    pub auto_delete: Option<bool>,
     /// The virtual host of the queue. Defaults to `/`.
     #[serde(skip_serializing_if = "Option::is_none")]
-    vhost: Option<String>,
+    pub vhost: Option<String>,
 }
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
@@ -327,17 +327,17 @@ pub struct IBMMQChannelBinding {
     /// the AsyncAPI channel name MUST be assumed for the
     /// IBM MQ topic string unless overridden.
     #[serde(skip_serializing_if = "Option::is_none")]
-    destination_type: Option<String>,
+    pub destination_type: Option<String>,
     /// Defines the properties of a queue.
     ///
     /// `queue` and `topic` fields MUST NOT coexist within a channel binding
     #[serde(skip_serializing_if = "Option::is_none")]
-    queue: Option<IBMMQChannelBindingQueue>,
+    pub queue: Option<IBMMQChannelBindingQueue>,
     /// Defines the properties of a topic.
     ///
     /// `queue` and `topic` fields MUST NOT coexist within a channel binding.
     #[serde(skip_serializing_if = "Option::is_none")]
-    topic: Option<IBMMQChannelBindingTopic>,
+    pub topic: Option<IBMMQChannelBindingTopic>,
     /// The maximum length of the physical message (in bytes) accepted
     /// by the Topic or Queue. Messages produced that are greater in size
     /// than this value may fail to be delivered. More information on the
@@ -347,10 +347,10 @@ pub struct IBMMQChannelBinding {
     ///
     /// MUST be `0-104,857,600` bytes (100 MB).
     #[serde(skip_serializing_if = "Option::is_none")]
-    max_msg_length: Option<i32>,
+    pub max_msg_length: Option<i32>,
     /// The version of this binding.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
@@ -360,7 +360,7 @@ pub struct IBMMQChannelBindingQueue {
     ///
     /// A value MUST be specified. MUST NOT exceed 48 characters in length.
     /// MUST be a valid IBM MQ queue name
-    object_name: String,
+    pub object_name: String,
     /// Defines if the queue is a cluster queue and therefore partitioned.
     /// If true, a binding option MAY be specified when accessing the queue.
     /// More information on binding options can be found on this
@@ -369,10 +369,10 @@ pub struct IBMMQChannelBindingQueue {
     ///
     /// If `false`, binding options SHOULD NOT be specified when accessing the queue.
     #[serde(skip_serializing_if = "Option::is_none")]
-    is_partitioned: Option<bool>,
+    pub is_partitioned: Option<bool>,
     /// Specifies if it is recommended to open the queue exclusively.
     #[serde(skip_serializing_if = "Option::is_none")]
-    exclusive: Option<bool>,
+    pub exclusive: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
@@ -385,7 +385,7 @@ pub struct IBMMQChannelBindingTopic {
     /// MUST NOT exceed 10240 characters in length.
     /// MAY coexist with `topic.objectName`
     #[serde(skip_serializing_if = "Option::is_none")]
-    string: Option<String>,
+    pub string: Option<String>,
     /// The name of the IBM MQ topic object.
     ///
     /// Note: if specified, SHALL override AsyncAPI channel name.
@@ -393,12 +393,12 @@ pub struct IBMMQChannelBindingTopic {
     /// MUST NOT exceed 48 characters in length.
     /// MAY coexist with `topic.string`
     #[serde(skip_serializing_if = "Option::is_none")]
-    object_name: Option<String>,
+    pub object_name: Option<String>,
     /// Defines if the subscription may be durable.
     #[serde(skip_serializing_if = "Option::is_none")]
-    durable_permitted: Option<bool>,
+    pub durable_permitted: Option<bool>,
     /// Defines if the last message published will be made
     /// available to new subscriptions.
     #[serde(skip_serializing_if = "Option::is_none")]
-    last_msg_retained: Option<bool>,
+    pub last_msg_retained: Option<bool>,
 }

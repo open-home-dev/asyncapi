@@ -8,49 +8,49 @@ use crate::Schema;
 pub struct OperationBinding {
     /// Protocol-specific information for an HTTP operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    http: Option<HTTPOperationBinding>,
+    pub http: Option<HTTPOperationBinding>,
     /// Protocol-specific information for a WebSockets operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    ws: Option<WebSocketsOperationBinding>,
+    pub ws: Option<WebSocketsOperationBinding>,
     /// Protocol-specific information for a Kafka operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    kafka: Option<KafkaOperationBinding>,
+    pub kafka: Option<KafkaOperationBinding>,
     /// Protocol-specific information for an Anypoint MQ operation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    anypointmq: Option<AnyPointMQOperationBinding>,
+    pub anypointmq: Option<AnyPointMQOperationBinding>,
     /// Protocol-specific information for an AMPQ operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    amqp: Option<AMQPOperationBinding>,
+    pub amqp: Option<AMQPOperationBinding>,
     /// Protocol-specific information for an AMQP 1.0 operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    amqp1: Option<AMQP1OperationBinding>,
+    pub amqp1: Option<AMQP1OperationBinding>,
     /// Protocol-specific information for an MQTT operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    mqtt: Option<MQTTOperationBinding>,
+    pub mqtt: Option<MQTTOperationBinding>,
     /// Protocol-specific information for an MQTT 5 operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    mqtt5: Option<MQTT5OperationBinding>,
+    pub mqtt5: Option<MQTT5OperationBinding>,
     /// Protocol-specific information for a NATS operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    nats: Option<NATSOperationBinding>,
+    pub nats: Option<NATSOperationBinding>,
     /// Protocol-specific information for a JMS operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    jms: Option<JMSOperationBinding>,
+    pub jms: Option<JMSOperationBinding>,
     /// Protocol-specific information for an SNS operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    sns: Option<SNSOperationBinding>,
+    pub sns: Option<SNSOperationBinding>,
     /// Protocol-specific information for an SQS operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    sqs: Option<SQSOperationBinding>,
+    pub sqs: Option<SQSOperationBinding>,
     /// Protocol-specific information for a STOMP operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    stomp: Option<STOMPOperationBinding>,
+    pub stomp: Option<STOMPOperationBinding>,
     /// Protocol-specific information for a Redis operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    redis: Option<RedisOperationBinding>,
+    pub redis: Option<RedisOperationBinding>,
     /// Protocol-specific information for a Mercure operation
     #[serde(skip_serializing_if = "Option::is_none")]
-    mercure: Option<MercureOperationBinding>,
+    pub mercure: Option<MercureOperationBinding>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
@@ -85,19 +85,19 @@ pub struct OperationBinding {
 pub struct HTTPOperationBinding {
     /// Required. Type of operation. Its value MUST be either `request` or `response`.
     #[serde(rename = "type")]
-    typ: String,
+    pub typ: String,
     /// When `type` is `request`, this is the HTTP method, otherwise it MUST be ignored.
     /// Its value MUST be one of `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`,
     /// `OPTIONS`, `CONNECT`, and `TRACE`.
     #[serde(skip_serializing_if = "Option::is_none")]
-    method: Option<String>,
+    pub method: Option<String>,
     /// A Schema object containing the definitions for each query parameter.
     /// This schema MUST be of type `object` and have a `properties` key.
     #[serde(skip_serializing_if = "Option::is_none")]
-    query: Option<Schema>,
+    pub query: Option<Schema>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
@@ -127,13 +127,13 @@ pub struct WebSocketsOperationBinding {}
 pub struct KafkaOperationBinding {
     /// Id of the consumer group.
     #[serde(skip_serializing_if = "Option::is_none")]
-    group_id: Option<Schema>,
+    pub group_id: Option<Schema>,
     /// Id of the consumer inside a consumer group.
     #[serde(skip_serializing_if = "Option::is_none")]
-    client_id: Option<String>, // TODO spec says "Schema Object" but examples are different
+    pub client_id: Option<String>, // TODO spec says "Schema Object" but examples are different
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
@@ -167,37 +167,37 @@ pub struct AnyPointMQOperationBinding {}
 pub struct AMQPOperationBinding {
     /// TTL (Time-To-Live) for the message. It MUST be greater than or equal to zero.
     #[serde(skip_serializing_if = "Option::is_none")]
-    expiration: Option<i32>,
+    pub expiration: Option<i32>,
     /// Identifies the user who has sent the message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    user_id: Option<String>,
+    pub user_id: Option<String>,
     /// The routing keys the message should be routed to at the time of publishing.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    cc: Vec<String>,
+    pub cc: Vec<String>,
     /// A priority for the message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    priority: Option<i32>,
+    pub priority: Option<i32>,
     /// Delivery mode of the message. Its value MUST be either 1 (transient) or 2 (persistent).
     #[serde(skip_serializing_if = "Option::is_none")]
-    delivery_mode: Option<i32>,
+    pub delivery_mode: Option<i32>,
     /// Whether the message is mandatory or not.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mandatory: Option<bool>,
+    pub mandatory: Option<bool>,
     /// Like [cc](https://github.com/asyncapi/bindings/blob/master/amqp/README.md#operationBindingObjectCC) but consumers will not receive this information.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    bcc: Vec<String>,
+    pub bcc: Vec<String>,
     /// Name of the queue where the consumer should send the response.
     #[serde(skip_serializing_if = "Option::is_none")]
-    reply_to: Option<String>,
+    pub reply_to: Option<String>,
     /// Whether the message should include a timestamp or not.
     #[serde(skip_serializing_if = "Option::is_none")]
-    timestamp: Option<bool>,
+    pub timestamp: Option<bool>,
     /// Whether the consumer should ack the message or not.
     #[serde(skip_serializing_if = "Option::is_none")]
-    ack: Option<bool>,
+    pub ack: Option<bool>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
@@ -225,13 +225,13 @@ pub struct MQTTOperationBinding {
     /// and server. Its value MUST be either 0 (At most once delivery),
     /// 1 (At least once delivery), or 2 (Exactly once delivery).
     #[serde(skip_serializing_if = "Option::is_none")]
-    qos: Option<i32>,
+    pub qos: Option<i32>,
     /// Whether the broker should retain the message or not.
     #[serde(skip_serializing_if = "Option::is_none")]
-    retain: Option<bool>,
+    pub retain: Option<bool>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
@@ -243,10 +243,10 @@ pub struct MQTT5OperationBinding {}
 pub struct NATSOperationBinding {
     /// Defines the name of the queue to use. It MUST NOT exceed 255 characters.
     #[serde(skip_serializing_if = "Option::is_none")]
-    queue: Option<String>,
+    pub queue: Option<String>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.

@@ -8,52 +8,52 @@ use crate::Schema;
 pub struct MessageBinding {
     /// Protocol-specific information for an HTTP message, i.e., a request or a response.
     #[serde(skip_serializing_if = "Option::is_none")]
-    http: Option<HTTPMessageBinding>,
+    pub http: Option<HTTPMessageBinding>,
     /// Protocol-specific information for a WebSockets message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    ws: Option<WebSocketMessageBinding>,
+    pub ws: Option<WebSocketMessageBinding>,
     /// Protocol-specific information for a Kafka message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    kafka: Option<KafkaMessageBinding>,
+    pub kafka: Option<KafkaMessageBinding>,
     /// Protocol-specific information for an Anypoint MQ message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    anypointmq: Option<AnyPointMQMessageBinding>,
+    pub anypointmq: Option<AnyPointMQMessageBinding>,
     /// Protocol-specific information for an AMQP 0-9-1 message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    amqp: Option<AMQPMessageBinding>,
+    pub amqp: Option<AMQPMessageBinding>,
     /// Protocol-specific information for an AMQP 1.0 message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    qmqp1: Option<AMQP1MessageBinding>,
+    pub qmqp1: Option<AMQP1MessageBinding>,
     /// Protocol-specific information for an MQTT message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mqtt: Option<MQTTMessageBinding>,
+    pub mqtt: Option<MQTTMessageBinding>,
     /// Protocol-specific information for an MQTT 5 message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mqtt5: Option<MQTT5MessageBinding>,
+    pub mqtt5: Option<MQTT5MessageBinding>,
     /// Protocol-specific information for a NATS message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    nats: Option<NATSMessageBinding>,
+    pub nats: Option<NATSMessageBinding>,
     /// Protocol-specific information for a JMS message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    jms: Option<JMSMessageBinding>,
+    pub jms: Option<JMSMessageBinding>,
     /// Protocol-specific information for an SNS message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    sns: Option<SNSMessageBinding>,
+    pub sns: Option<SNSMessageBinding>,
     /// Protocol-specific information for an SQS message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    sqs: Option<SQSMessageBinding>,
+    pub sqs: Option<SQSMessageBinding>,
     /// Protocol-specific information for a STOMP message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    stomp: Option<STOMPMessageBinding>,
+    pub stomp: Option<STOMPMessageBinding>,
     /// Protocol-specific information for a Redis message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    redis: Option<RedisMessageBinding>,
+    pub redis: Option<RedisMessageBinding>,
     /// Protocol-specific information for a Mercure message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mercure: Option<MercureMessageBinding>,
+    pub mercure: Option<MercureMessageBinding>,
     /// Protocol-specific information for an IBM MQ message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    ibmmq: Option<IBMMQMessageBinding>,
+    pub ibmmq: Option<IBMMQMessageBinding>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
@@ -67,10 +67,10 @@ pub struct HTTPMessageBinding {
     /// A Schema object containing the definitions for HTTP-specific headers.
     /// This schema MUST be of type object and have a properties key.
     #[serde(skip_serializing_if = "Option::is_none")]
-    headers: Option<Schema>,
+    pub headers: Option<Schema>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// When using WebSockets, the channel represents the connection.
@@ -83,18 +83,18 @@ pub struct HTTPMessageBinding {
 pub struct WebSocketMessageBinding {
     /// The HTTP method to use when establishing the connection. Its value MUST be either GET or POST.
     #[serde(skip_serializing_if = "Option::is_none")]
-    method: Option<String>,
+    pub method: Option<String>,
     /// A Schema object containing the definitions for each query parameter.
     /// This schema MUST be of type object and have a properties key.
     #[serde(skip_serializing_if = "Option::is_none")]
-    query: Option<Schema>,
+    pub query: Option<Schema>,
     /// A Schema object containing the definitions of the HTTP headers to use when establishing the connection.
     /// This schema MUST be of type object and have a properties key.
     #[serde(skip_serializing_if = "Option::is_none")]
-    headers: Option<Schema>,
+    pub headers: Option<Schema>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object contains information about the message representation in Kafka.
@@ -103,10 +103,10 @@ pub struct WebSocketMessageBinding {
 pub struct KafkaMessageBinding {
     /// The message key.
     #[serde(skip_serializing_if = "Option::is_none")]
-    key: Option<Schema>,
+    pub key: Option<Schema>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// The Anypoint MQ [Message Binding Object][MessageBinding] is defined by a
@@ -163,10 +163,10 @@ pub struct AnyPointMQMessageBinding {
     /// (so-called protocol headers). This schema MUST be of type object and have a properties key.
     /// Examples of Anypoint MQ protocol headers are messageId and messageGroupId.
     #[serde(skip_serializing_if = "Option::is_none")]
-    headers: Option<Schema>,
+    pub headers: Option<Schema>,
     /// **Optional**, defaults to `latest`. The version of this binding.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object contains information about the message representation in AMQP.
@@ -175,13 +175,13 @@ pub struct AnyPointMQMessageBinding {
 pub struct AMQPMessageBinding {
     /// A MIME encoding for the message content.
     #[serde(skip_serializing_if = "Option::is_none")]
-    content_encoding: Option<String>,
+    pub content_encoding: Option<String>,
     /// Application-specific message type.
     #[serde(skip_serializing_if = "Option::is_none")]
-    message_type: Option<String>,
+    pub message_type: Option<String>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
@@ -195,7 +195,7 @@ pub struct AMQP1MessageBinding {}
 pub struct MQTTMessageBinding {
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
@@ -242,5 +242,5 @@ pub struct MercureMessageBinding {}
 #[serde(rename_all = "camelCase")]
 pub struct IBMMQMessageBinding {
     #[serde(rename = "type")]
-    typ: Option<String>,
+    pub typ: Option<String>,
 }

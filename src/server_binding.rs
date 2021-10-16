@@ -7,52 +7,52 @@ use serde::{Deserialize, Serialize};
 pub struct ServerBinding {
     /// Protocol-specific information for an HTTP server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    http: Option<HTTPServerBinding>,
+    pub http: Option<HTTPServerBinding>,
     /// Protocol-specific information for a WebSockets server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    ws: Option<WebsocketsServerBinding>,
+    pub ws: Option<WebsocketsServerBinding>,
     /// Protocol-specific information for a Kafka server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    kafka: Option<KafkaServerBinding>,
+    pub kafka: Option<KafkaServerBinding>,
     /// Protocol-specific information for an Anypoint MQ server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    anypointmq: Option<AnyPointMQServerBinding>,
+    pub anypointmq: Option<AnyPointMQServerBinding>,
     /// Protocol-specific information for an AMQP 0-9-1 server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    amqp: Option<AMPQServerBinding>,
+    pub amqp: Option<AMPQServerBinding>,
     /// Protocol-specific information for an AMQP 1.0 server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    ampq1: Option<AMPQ1ServerBinding>,
+    pub ampq1: Option<AMPQ1ServerBinding>,
     ///	Protocol-specific information for an MQTT server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mqtt: Option<MQTTServerBinding>,
+    pub mqtt: Option<MQTTServerBinding>,
     /// Protocol-specific information for an MQTT 5 server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mqtt5: Option<MQTT5ServerBinding>,
+    pub mqtt5: Option<MQTT5ServerBinding>,
     /// Protocol-specific information for a NATS server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    nats: Option<NATSServerBinding>,
+    pub nats: Option<NATSServerBinding>,
     /// Protocol-specific information for a JMS server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    jms: Option<JMSServerBinding>,
+    pub jms: Option<JMSServerBinding>,
     /// Protocol-specific information for an SNS server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    sns: Option<SNSServerBinding>,
+    pub sns: Option<SNSServerBinding>,
     /// Protocol-specific information for an SQS server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    sqs: Option<SQSServerBinding>,
+    pub sqs: Option<SQSServerBinding>,
     /// Protocol-specific information for a STOMP server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    stomp: Option<STOMPServerBinding>,
+    pub stomp: Option<STOMPServerBinding>,
     /// Protocol-specific information for a Redis server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    redis: Option<RedisServerBinding>,
+    pub redis: Option<RedisServerBinding>,
     ///	Protocol-specific information for a Mercure server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    mercure: Option<MercureServerBinding>,
+    pub mercure: Option<MercureServerBinding>,
     /// Protocol-specific information for an IBM MQ server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    ibmmq: Option<IBMMQServerBinding>,
+    pub ibmmq: Option<IBMMQServerBinding>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
     #[serde(flatten)]
@@ -106,21 +106,21 @@ pub struct AMPQ1ServerBinding {}
 pub struct MQTTServerBinding {
     /// The client identifier.
     #[serde(skip_serializing_if = "Option::is_none")]
-    client_id: Option<String>,
+    pub client_id: Option<String>,
     /// Whether to create a persisten connection or not.
     /// When `false`, the connection will be persistent.
     #[serde(skip_serializing_if = "Option::is_none")]
-    clean_session: Option<bool>,
+    pub clean_session: Option<bool>,
     /// Last Will and Testament configuration.
     #[serde(skip_serializing_if = "Option::is_none")]
-    last_will: Option<MQTTServerBindingLasWill>,
+    pub last_will: Option<MQTTServerBindingLasWill>,
     /// Interval in seconds of the longest period of time the broker
     /// and the client can endure without sending a message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    keep_alive: Option<i32>,
+    pub keep_alive: Option<i32>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
 
 /// Last Will and Testament configuration.
@@ -129,19 +129,19 @@ pub struct MQTTServerBinding {
 pub struct MQTTServerBindingLasWill {
     /// The topic where the Last Will and Testament message will be sent.
     #[serde(skip_serializing_if = "Option::is_none")]
-    topic: Option<String>,
+    pub topic: Option<String>,
     /// Defines how hard the broker/client will try to ensure that the
     /// Last Will and Testament message is received. Its value MUST be
     /// either 0, 1 or 2.
     #[serde(skip_serializing_if = "Option::is_none")]
-    qos: Option<i32>,
+    pub qos: Option<i32>,
     /// Last Will message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    message: Option<String>,
+    pub message: Option<String>,
     /// Whether the broker should retain the Last Will and
     /// Testament message or not.
     #[serde(skip_serializing_if = "Option::is_none")]
-    retain: Option<bool>,
+    pub retain: Option<bool>,
 }
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
@@ -235,12 +235,12 @@ pub struct IBMMQServerBinding {
     ///
     /// MUST NOT be specified for URI Scheme `http://` or `file://`
     #[serde(skip_serializing_if = "Option::is_none")]
-    group_id: Option<String>,
+    pub group_id: Option<String>,
     /// The name of the IBM MQ queue manager to bind to in the CCDT file.
     ///
     /// MUST NOT be specified for URI Scheme `ibmmq://`
     #[serde(skip_serializing_if = "Option::is_none")]
-    ccdt_queue_manager_name: Option<String>,
+    pub ccdt_queue_manager_name: Option<String>,
     /// The recommended cipher specification used to establish a TLS connection
     /// between the client and the IBM MQ queue manager. More information on
     /// SSL/TLS cipher specifications supported by IBM MQ can be found on this
@@ -249,7 +249,7 @@ pub struct IBMMQServerBinding {
     ///
     /// MUST NOT be specified for protocol ibmmq or URI Scheme `file://` or `http://`
     #[serde(skip_serializing_if = "Option::is_none")]
-    cipher_spec: Option<String>,
+    pub cipher_spec: Option<String>,
     /// If `multiEndpointServer` is `true` then multiple connections can be workload balanced
     /// and applications should not make assumptions as to where messages are processed.
     // Where message ordering, or affinity to specific message resources is necessary, a
@@ -257,7 +257,7 @@ pub struct IBMMQServerBinding {
     ///
     /// MUST NOT be specified for URI Scheme `file://` or `http://`
     #[serde(skip_serializing_if = "Option::is_none")]
-    multi_endpoint_server: Option<bool>,
+    pub multi_endpoint_server: Option<bool>,
     /// The recommended value (in seconds) for the heartbeat sent to the queue manager during
     /// periods of inactivity. A value of zero means that no heart beats are sent. A value of
     /// `1` means that the client will use the value defined by the queue manager. More
@@ -267,8 +267,8 @@ pub struct IBMMQServerBinding {
     ///
     /// MUST be `0-999999`
     #[serde(skip_serializing_if = "Option::is_none")]
-    heart_beat_interval: Option<i32>,
+    pub heart_beat_interval: Option<i32>,
     /// The version of this binding.
     #[serde(skip_serializing_if = "Option::is_none")]
-    binding_version: Option<String>,
+    pub binding_version: Option<String>,
 }
