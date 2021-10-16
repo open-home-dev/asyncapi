@@ -151,7 +151,7 @@ pub enum SecurityScheme {
         #[serde(skip_serializing_if = "Option::is_none")]
         description: Option<String>,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -167,7 +167,7 @@ pub enum SecurityScheme {
         #[serde(rename = "in")]
         location: String,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -178,7 +178,7 @@ pub enum SecurityScheme {
         #[serde(skip_serializing_if = "Option::is_none")]
         description: Option<String>,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -190,7 +190,7 @@ pub enum SecurityScheme {
         #[serde(skip_serializing_if = "Option::is_none")]
         description: Option<String>,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -202,7 +202,7 @@ pub enum SecurityScheme {
         #[serde(skip_serializing_if = "Option::is_none")]
         description: Option<String>,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -221,7 +221,7 @@ pub enum SecurityScheme {
         #[serde(rename = "in")]
         location: String,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -242,7 +242,7 @@ pub enum SecurityScheme {
         #[serde(skip_serializing_if = "Option::is_none")]
         bearer_format: Option<String>,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -296,7 +296,7 @@ pub enum SecurityScheme {
         /// information for the flow types supported.
         flows: OAuthFlows,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -311,7 +311,7 @@ pub enum SecurityScheme {
         /// OAuth2 configuration values. This MUST be in the form of a URL.
         open_id_connect_url: String,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -323,7 +323,7 @@ pub enum SecurityScheme {
         #[serde(skip_serializing_if = "Option::is_none")]
         description: Option<String>,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -335,7 +335,7 @@ pub enum SecurityScheme {
         #[serde(skip_serializing_if = "Option::is_none")]
         description: Option<String>,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -347,7 +347,7 @@ pub enum SecurityScheme {
         #[serde(skip_serializing_if = "Option::is_none")]
         description: Option<String>,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -359,7 +359,7 @@ pub enum SecurityScheme {
         #[serde(skip_serializing_if = "Option::is_none")]
         description: Option<String>,
         /// This object MAY be extended with
-        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+        /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
         #[serde(flatten)]
         extensions: IndexMap<String, serde_json::Value>,
     },
@@ -382,7 +382,7 @@ pub struct OAuthFlows {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub authorization_code: Option<OAuthFlowAuthorizationCode>,
     /// This object MAY be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -402,7 +402,7 @@ pub struct OAuthFlowImplicit {
     /// A map between the scope name and a short description for it.
     pub scopes: IndexMap<String, String>,
     /// This object MAY be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -422,7 +422,7 @@ pub struct OAuthFlowPassword {
     /// A map between the scope name and a short description for it.
     pub scopes: IndexMap<String, String>,
     /// This object MAY be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -442,7 +442,7 @@ pub struct OAuthFlowClientCredentials {
     /// A map between the scope name and a short description for it.
     pub scopes: IndexMap<String, String>,
     /// This object MAY be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -465,7 +465,7 @@ pub struct OAuthFlowAuthorizationCode {
     /// A map between the scope name and a short description for it.
     pub scopes: IndexMap<String, String>,
     /// This object MAY be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }

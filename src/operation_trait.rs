@@ -4,13 +4,13 @@ use serde::{Deserialize, Serialize};
 use crate::{ExternalDocumentation, OperationBinding, ReferenceOr, Tag};
 
 /// Describes a trait that MAY be applied to an
-/// [Operation Object](https://www.asyncapi.com/docs/specifications/v2.1.0#operationObject).
+/// [Operation Object][crate::Operation].
 /// This object MAY contain any property from the
-/// [Operation Object](https://www.asyncapi.com/docs/specifications/v2.1.0#operationObject),
+/// [Operation Object][crate::Operation],
 /// except `message` and `traits`.
 ///
 /// If you're looking to apply traits to a message, see the
-/// [Message Trait Object](https://www.asyncapi.com/docs/specifications/v2.1.0#messageTraitObject).
+/// [Message Trait Object][crate::MessageTrait].
 ///
 /// # Examples
 ///
@@ -58,7 +58,7 @@ pub struct OperationTrait {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bindings: Option<ReferenceOr<OperationBinding>>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }

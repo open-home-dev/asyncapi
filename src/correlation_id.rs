@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 /// An object that specifies an identifier at design time that can used for message tracing and correlation.
 ///
 /// For specifying and computing the location of a Correlation ID, a
-/// [runtime expression](https://www.asyncapi.com/docs/specifications/v2.1.0#runtimeExpression) is used.
+/// [runtime expression](https://www.asyncapi.com/docs/specifications/v2.2.0#runtimeExpression) is used.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct CorrelationId {
     /// An optional description of the identifier.
@@ -15,7 +15,7 @@ pub struct CorrelationId {
     /// **REQUIRED**. A runtime expression that specifies the location of the correlation ID.
     pub location: String,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }

@@ -185,51 +185,51 @@ use crate::{
 #[serde(rename_all = "camelCase")]
 pub struct Components {
     /// An object to hold reusable
-    /// [Schema Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#schemaObject).
+    /// [Schema Objects][crate::Schema].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub schemas: IndexMap<String, ReferenceOr<Schema>>,
     /// An object to hold reusable
-    /// [Message Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#messageObject).
+    /// [Message Objects][crate::Message].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub messages: IndexMap<String, ReferenceOr<Message>>,
     /// An object to hold reusable
-    /// [Security Scheme Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#securitySchemeObject).
+    /// [Security Scheme Objects][crate::SecurityScheme].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub security_schemes: IndexMap<String, ReferenceOr<SecurityScheme>>,
     /// An object to hold reusable
-    /// [Parameter Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#parameterObject).
+    /// [Parameter Objects][crate::Parameter].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub parameters: IndexMap<String, ReferenceOr<Parameter>>,
     /// An object to hold reusable
-    /// [Correlation ID Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#correlationIdObject).
+    /// [Correlation ID Objects][crate::CorrelationId].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub correlation_ids: IndexMap<String, ReferenceOr<CorrelationId>>,
     /// An object to hold reusable
-    /// [Operation Trait Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#operationTraitObject).
+    /// [Operation Trait Objects][crate::OperationTrait].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub operation_traits: IndexMap<String, ReferenceOr<OperationTrait>>,
     /// An object to hold reusable
-    /// [Message Trait Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#messageTraitObject).
+    /// [Message Trait Objects][crate::MessageTrait].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub message_traits: IndexMap<String, ReferenceOr<MessageTrait>>,
     /// An object to hold reusable
-    /// [Server Bindings Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#serverBindingsObject).
+    /// [Server Bindings Objects][crate::ServerBinding].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub server_bindings: IndexMap<String, ReferenceOr<ServerBinding>>,
     /// An object to hold reusable
-    /// [Channel Bindings Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#channelBindingsObject).
+    /// [Channel Bindings Objects][crate::ChannelBinding].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub channel_bindings: IndexMap<String, ReferenceOr<ChannelBinding>>,
     /// An object to hold reusable
-    /// [Operation Bindings Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#operationBindingsObject).
+    /// [Operation Bindings Objects][crate::OperationBinding].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub operation_bindings: IndexMap<String, ReferenceOr<OperationBinding>>,
     /// An object to hold reusable
-    /// [Message Bindings Objects](https://www.asyncapi.com/docs/specifications/v2.1.0#messageBindingsObject).
+    /// [Message Bindings Objects][crate::MessageBinding].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub message_bindings: IndexMap<String, ReferenceOr<MessageBinding>>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }

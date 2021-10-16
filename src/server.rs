@@ -164,7 +164,7 @@ pub struct Server {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bindings: Option<ReferenceOr<ServerBinding>>,
     /// This object MAY be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -191,7 +191,7 @@ pub struct ServerVariable {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub examples: Option<Vec<String>>,
     /// This object MAY be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.1.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -249,8 +249,8 @@ pub struct ServerVariable {
 #[serde(rename_all = "camelCase")]
 pub struct SecurityRequirement {
     /// Each name MUST correspond to a security scheme which is declared in the
-    /// [Security Schemes](https://www.asyncapi.com/docs/specifications/v2.1.0#componentsSecuritySchemes)
-    /// under the [Components Object](https://www.asyncapi.com/docs/specifications/v2.1.0#componentsObject).
+    /// [Security Schemes][crate::SecurityScheme]
+    /// under the [Components Object][crate::Components].
     /// If the security scheme is of type `"oauth2"` or `"openIdConnect"`, then
     /// the value is a list of scope names. Provide scopes that are required to
     /// establish successful connection with the server. If scopes are not
