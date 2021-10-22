@@ -20,6 +20,7 @@ mod server;
 pub mod server_binding;
 mod tag;
 mod variant_or;
+mod vec_or_single;
 
 pub use api::AsyncAPI;
 pub use channel::{Channel, Operation};

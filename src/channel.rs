@@ -86,7 +86,7 @@ use crate::{
 pub struct Channel {
     /// Allows for an external definition of this channel item. The referenced structure
     /// MUST be in the format of a
-    /// [Channel Item Object](https://www.asyncapi.com/docs/specifications/v2.1.0#channelItemObject).
+    /// [Channel Item Object][crate::Channel].
     /// If there are conflicts between the referenced definition and this Channel Item's
     /// definition, the behavior is *undefined*.
     #[serde(rename = "$ref")]
@@ -275,8 +275,11 @@ pub struct Operation {
     /// A definition of the message that will be published or received on
     /// this channel. `oneOf` is allowed here to specify multiple messages, however,
     /// **a message MUST be valid only against one of the referenced message objects.**
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub message: Option<ReferenceOr<Message>>,
+    ///
+    /// The spec asks for a vector though the examples use a single value.
+    /// A change of the spec is proposed in the pull request https://github.com/asyncapi/spec/pull/603
+    #[serde(skip_serializing_if = "Vec::is_empty", with = "crate::vec_or_single")]
+    pub message: Vec<ReferenceOr<Message>>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]

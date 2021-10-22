@@ -129,8 +129,12 @@ pub struct KafkaOperationBinding {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub group_id: Option<Schema>,
     /// Id of the consumer inside a consumer group.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub client_id: Option<String>, // TODO spec says "Schema Object" but examples are different
+    ///
+    /// The spec asks for a "Schema Object" but examples are different.
+    /// See https://github.com/asyncapi/bindings/pull/95 for a pull request
+    /// fixing this problem.
+    #[serde(skip_serializing_if = "Vec::is_empty", with = "crate::vec_or_single")]
+    pub client_id: Vec<String>,
     /// The version of this binding. If omitted, "latest" MUST be assumed.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub binding_version: Option<String>,
