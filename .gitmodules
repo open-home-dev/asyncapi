@@ -1,0 +1,3 @@
+[submodule "fixtures/tck"]
+	path = fixtures/tck
+	url = https://github.com/asyncapi/tck

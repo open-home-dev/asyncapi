@@ -278,10 +278,33 @@ pub struct Operation {
     ///
     /// The spec asks for a vector though the examples use a single value.
     /// A change of the spec is proposed in the pull request https://github.com/asyncapi/spec/pull/603
-    #[serde(skip_serializing_if = "Vec::is_empty", with = "crate::vec_or_single")]
-    pub message: Vec<ReferenceOr<Message>>,
+    #[serde(default, skip_serializing_if = "OperationMessageType::is_none")]
+    pub message: OperationMessageType,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[serde(untagged)]
+pub enum OperationMessageType {
+    Map(IndexMap<String, ReferenceOr<Message>>),
+    Single(ReferenceOr<Message>),
+    None,
+}
+
+impl Default for OperationMessageType {
+    fn default() -> Self {
+        return OperationMessageType::None;
+    }
+}
+
+impl OperationMessageType {
+    fn is_none(&self) -> bool {
+        match self {
+            OperationMessageType::None => true,
+            _ => false,
+        }
+    }
 }

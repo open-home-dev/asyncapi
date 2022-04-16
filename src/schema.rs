@@ -1,17 +1,18 @@
 use crate::*;
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
+use std::clone::Clone;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct SchemaData {
-    #[serde(default, skip_serializing_if = "is_false")]
+    #[serde(default, skip_serializing_if = "Clone::clone")]
     pub nullable: bool,
-    #[serde(default, skip_serializing_if = "is_false")]
+    #[serde(default, skip_serializing_if = "Clone::clone")]
     pub read_only: bool,
-    #[serde(default, skip_serializing_if = "is_false")]
+    #[serde(default, skip_serializing_if = "Clone::clone")]
     pub write_only: bool,
-    #[serde(default, skip_serializing_if = "is_false")]
+    #[serde(default, skip_serializing_if = "Clone::clone")]
     pub deprecated: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub external_docs: Option<ExternalDocumentation>,
@@ -131,10 +132,10 @@ pub struct NumberType {
     pub format: VariantOrUnknownOrEmpty<NumberFormat>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub multiple_of: Option<f64>,
-    #[serde(default, skip_serializing_if = "is_false")]
-    pub exclusive_minimum: bool,
-    #[serde(default, skip_serializing_if = "is_false")]
-    pub exclusive_maximum: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub exclusive_minimum: Option<f64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub exclusive_maximum: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub minimum: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -150,10 +151,10 @@ pub struct IntegerType {
     pub format: VariantOrUnknownOrEmpty<IntegerFormat>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub multiple_of: Option<i64>,
-    #[serde(default, skip_serializing_if = "is_false")]
-    pub exclusive_minimum: bool,
-    #[serde(default, skip_serializing_if = "is_false")]
-    pub exclusive_maximum: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub exclusive_minimum: Option<i64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub exclusive_maximum: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub minimum: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -186,7 +187,7 @@ pub struct ArrayType {
     pub min_items: Option<usize>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max_items: Option<usize>,
-    #[serde(default, skip_serializing_if = "is_false")]
+    #[serde(default, skip_serializing_if = "Clone::clone")]
     pub unique_items: bool,
 }
 

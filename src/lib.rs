@@ -20,7 +20,6 @@ mod server;
 pub mod server_binding;
 mod tag;
 mod variant_or;
-mod vec_or_single;
 
 pub use api::AsyncAPI;
 pub use channel::{Channel, Operation};
@@ -44,9 +43,3 @@ pub use server::{SecurityRequirement, Server, ServerVariable};
 pub use server_binding::ServerBinding;
 pub use tag::Tag;
 pub use variant_or::{VariantOrUnknown, VariantOrUnknownOrEmpty};
-
-#[allow(clippy::trivially_copy_pass_by_ref)] // needs to match signature for use in serde attribute
-#[inline]
-pub(crate) const fn is_false(v: &bool) -> bool {
-    !(*v)
-}

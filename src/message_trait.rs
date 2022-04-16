@@ -74,9 +74,69 @@ pub struct MessageTrait {
     /// and the values describe protocol-specific definitions for the message.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bindings: Option<ReferenceOr<MessageBinding>>,
-    /// An array with examples of valid message objects.
+    /// List of examples.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub examples: Vec<MessageExample>,
+    /// This object can be extended with
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
+    #[serde(flatten)]
+    pub extensions: IndexMap<String, serde_json::Value>,
+}
+
+/// Message Example Object represents an example of a
+/// [Message Object][crate::Message] and MUST contain either **headers**
+/// and/or **payload** fields.
+///
+/// # Examples
+///
+/// ```json
+/// {
+///     "name": "SimpleSignup",
+///     "summary": "A simple UserSignup example message",
+///     "headers": {
+///         "correlationId": "my-correlation-id",
+///         "applicationInstanceId": "myInstanceId"
+///     },
+///     "payload": {
+///         "user": {
+///         "someUserKey": "someUserValue"
+///         },
+///         "signup": {
+///         "someSignupKey": "someSignupValue"
+///         }
+///     }
+/// }
+/// ```
+///
+/// ```yaml
+/// name: SimpleSignup
+/// summary: A simple UserSignup example message
+/// headers:
+///   correlationId: my-correlation-id
+///   applicationInstanceId: myInstanceId
+/// payload:
+///   user:
+///     someUserKey: someUserValue
+///   signup:
+///     someSignupKey: someSignupValue
+/// ```
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct MessageExample {
+    /// The value of this field MUST validate against the
+    /// [Message Object's][crate::Message] headers field.
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub examples: IndexMap<String, serde_json::Value>,
+    pub headers: IndexMap<String, serde_json::Value>,
+    /// The value of this field MUST validate against the
+    /// [Message Object's][crate::Message] payload field.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payload: Option<serde_json::Value>,
+    /// A machine-friendly name.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    /// A short summary of what the example is about.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub summary: Option<String>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
     #[serde(flatten)]
