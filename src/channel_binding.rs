@@ -39,6 +39,9 @@ pub struct ChannelBinding {
     /// Protocol-specific information for an SNS channel.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sns: Option<SNSChannelBinding>,
+    /// Protocol-specific information for a Solace channel.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub solace: Option<SolaceChannelBinding>,
     /// Protocol-specific information for an SQS channel.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sqs: Option<SQSChannelBinding>,
@@ -55,7 +58,7 @@ pub struct ChannelBinding {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ibmmq: Option<IBMMQChannelBinding>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -263,6 +266,11 @@ pub struct JMSChannelBinding {}
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct SNSChannelBinding {}
+
+/// This object MUST NOT contain any properties. Its name is reserved for future use.
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct SolaceChannelBinding {}
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]

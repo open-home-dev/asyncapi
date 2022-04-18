@@ -13,7 +13,7 @@ pub enum ReferenceOr<T> {
     /// is formatted in either JSON or YAML. In the case of a YAML-formatted Schema,
     /// the JSON Reference SHALL be applied to the JSON representation of that schema.
     /// The JSON representation SHALL be made by applying the conversion described
-    /// [here](https://www.asyncapi.com/docs/specifications/v2.2.0#format).
+    /// [here](https://www.asyncapi.com/docs/specifications/v2.3.0#format).
     ///
     /// For this specification, reference resolution is done as defined by the
     /// JSON Reference specification and not by the JSON Schema specification.

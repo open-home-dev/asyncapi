@@ -38,6 +38,9 @@ pub struct ServerBinding {
     /// Protocol-specific information for an SNS server.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sns: Option<SNSServerBinding>,
+    /// Protocol-specific information for a Solace server.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub solace: Option<SolaceServerBinding>,
     /// Protocol-specific information for an SQS server.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sqs: Option<SQSServerBinding>,
@@ -54,7 +57,7 @@ pub struct ServerBinding {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ibmmq: Option<IBMMQServerBinding>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -159,6 +162,17 @@ pub struct JMSServerBinding {}
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct SNSServerBinding {}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct SolaceServerBinding {
+    /// The current version is 0.2.0
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub binding_version: Option<String>,
+    /// The Virtual Private Network name on the Solace broker.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub msg_vpn: Option<String>,
+}
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]

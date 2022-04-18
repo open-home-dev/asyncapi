@@ -1,6 +1,6 @@
 # AsyncAPI
 
-This crate aims to provide data structures that represent the [AsyncAPI v 2.2.0 specification](https://www.asyncapi.com/docs/specifications/v2.2.0).
+This crate aims to provide data structures that represent the [AsyncAPI v 2.3.0 specification](https://www.asyncapi.com/docs/specifications/v2.3.0).
 
 This crate is still in an early development stage. It is yet to be tested and adapted to new versions of the specification.
 

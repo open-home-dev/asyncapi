@@ -39,6 +39,9 @@ pub struct MessageBinding {
     /// Protocol-specific information for an SNS message.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sns: Option<SNSMessageBinding>,
+    /// Protocol-specific information for a Solace message.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub solace: Option<SolaceMessageBinding>,
     /// Protocol-specific information for an SQS message.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sqs: Option<SQSMessageBinding>,
@@ -55,7 +58,7 @@ pub struct MessageBinding {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ibmmq: Option<IBMMQMessageBinding>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -217,6 +220,11 @@ pub struct JMSMessageBinding {}
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct SNSMessageBinding {}
+
+/// This object MUST NOT contain any properties. Its name is reserved for future use.
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct SolaceMessageBinding {}
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]

@@ -39,6 +39,9 @@ pub struct OperationBinding {
     /// Protocol-specific information for an SNS operation
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sns: Option<SNSOperationBinding>,
+    /// Protocol-specific information for a Solace operation
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub solace: Option<SolaceOperationBinding>,
     /// Protocol-specific information for an SQS operation
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sqs: Option<SQSOperationBinding>,
@@ -52,7 +55,7 @@ pub struct OperationBinding {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mercure: Option<MercureOperationBinding>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -256,6 +259,93 @@ pub struct JMSOperationBinding {}
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct SNSOperationBinding {}
+
+/// We need the ability to support several bindings for each operation, see the
+/// [Example](https://github.com/asyncapi/bindings/tree/master/solace#example)
+/// section for details.
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct SolaceOperationBinding {
+    /// The current version is 0.2.0
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub binding_version: Option<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub destinations: Vec<SolaceDestination>,
+}
+
+/// Each destination has the following structure. Note that bindings under a
+/// 'subscribe' operation define the behaviour of publishers, and those under a
+/// 'publish' operation define how subscribers are configured.
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct SolaceDestination {
+    /// 'queue' or 'topic'. If the type is queue, then the subscriber can bind
+    /// to the queue, which in turn will subscribe to the topic as represented
+    /// by the channel name or to the provided topicSubscriptions.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    destination_type: Option<SolaceDestinationType>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    delivery_mode: Option<SolaceDestinationDeliveryMode>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    queue: Option<SolaceDestinationQueue>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    topic: Option<SolaceDestinationTopic>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub enum SolaceDestinationType {
+    Queue,
+    Topic,
+}
+
+/// 'direct' or 'persistent'. This determines the quality of service for
+/// publishing messages as documented
+/// [here](https://docs.solace.com/PubSub-Basics/Core-Concepts-Message-Delivery-Modes.htm).
+/// Default is 'persistent'.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub enum SolaceDestinationDeliveryMode {
+    Direct,
+    Persistent,
+}
+
+impl Default for SolaceDestinationDeliveryMode {
+    fn default() -> Self {
+        SolaceDestinationDeliveryMode::Persistent
+    }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct SolaceDestinationQueue {
+    /// The name of the queue, only applicable when destinationType is 'queue'.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    name: Option<String>,
+    /// A list of topics that the queue subscribes to, only applicable when
+    /// destinationType is 'queue'. If none is given, the queue subscribes to
+    /// the topic as represented by the channel name.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    topic_subscriptions: Vec<String>,
+    /// 'exclusive' or 'nonexclusive'. This is documented
+    /// [here](https://docs.solace.com/PubSub-Basics/Endpoints.htm).
+    /// Only applicable when destinationType is 'queue'.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    access_type: Option<SolaceDestinationQueueAccessType>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub enum SolaceDestinationQueueAccessType {
+    Exclusive,
+    Nonexclusive,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct SolaceDestinationTopic {
+    /// A list of topics that the client subscribes to, only applicable when
+    /// destinationType is 'topic'. If none is given, the client subscribes to
+    /// the topic as represented by the channel name.
+    topic_subscriptions: Vec<String>,
+}
 
 /// This object MUST NOT contain any properties. Its name is reserved for future use.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]

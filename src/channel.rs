@@ -89,6 +89,10 @@ pub struct Channel {
     /// [Channel Item Object][crate::Channel].
     /// If there are conflicts between the referenced definition and this Channel Item's
     /// definition, the behavior is *undefined*.
+    #[deprecated(note = "The $ref field in Channel Item Object is now deprecated
+        from AsyncAPI 2.3.0. The current plan is that the $ref field will be 
+        removed from Channel Item Object in AsyncAPI 3.0, and replaced with 
+        Reference Object.")]
     #[serde(rename = "$ref")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reference: Option<String>,
@@ -125,15 +129,15 @@ pub struct Channel {
     /// {
     ///     "user/{userId}/signup": {
     ///         "parameters": {
-    ///         "userId": {
-    ///             "description": "Id of the user.",
-    ///             "schema": {
-    ///             "type": "string"
+    ///             "userId": {
+    ///                 "description": "Id of the user.",
+    ///                 "schema": {
+    ///                    "type": "string"
+    ///                 }
     ///             }
-    ///         }
     ///         },
     ///         "subscribe": {
-    ///         "$ref": "#/components/messages/userSignedUp"
+    ///             "$ref": "#/components/messages/userSignedUp"
     ///         }
     ///     }
     /// }
@@ -156,7 +160,7 @@ pub struct Channel {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bindings: Option<ReferenceOr<ChannelBinding>>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -244,7 +248,12 @@ pub struct Channel {
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Operation {
-    /// Unique string used to identify the operation. The id MUST be unique among all operations described in the API. The operationId value is case-sensitive. Tools and libraries MAY use the operationId to uniquely identify an operation, therefore, it is RECOMMENDED to follow common programming naming conventions.
+    /// Unique string used to identify the operation.
+    /// The id MUST be unique among all operations described in the API.
+    /// The operationId value is **case-sensitive**.
+    /// Tools and libraries MAY use the operationId to uniquely identify an
+    /// operation, therefore, it is RECOMMENDED to follow common programming
+    /// naming conventions.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub operation_id: Option<String>,
     /// A short summary of what the operation is about.
@@ -275,13 +284,10 @@ pub struct Operation {
     /// A definition of the message that will be published or received on
     /// this channel. `oneOf` is allowed here to specify multiple messages, however,
     /// **a message MUST be valid only against one of the referenced message objects.**
-    ///
-    /// The spec asks for a vector though the examples use a single value.
-    /// A change of the spec is proposed in the pull request https://github.com/asyncapi/spec/pull/603
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub message: Option<OperationMessageType>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }

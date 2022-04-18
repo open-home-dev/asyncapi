@@ -46,7 +46,8 @@ pub struct MessageTrait {
     /// The content type to use when encoding/decoding a message's payload.
     /// The value MUST be a specific media type (e.g. `application/json`).
     /// When omitted, the value MUST be the one specified on the
-    /// [defaultContentType](https://www.asyncapi.com/docs/specifications/v2.2.0#defaultContentTypeString) field.
+    /// [defaultContentType](https://www.asyncapi.com/docs/specifications/v2.3.0#defaultContentTypeString)
+    /// field.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub content_type: Option<String>,
     /// A machine-friendly name for the message.
@@ -78,7 +79,7 @@ pub struct MessageTrait {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub examples: Vec<MessageExample>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
@@ -138,7 +139,7 @@ pub struct MessageExample {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub summary: Option<String>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }

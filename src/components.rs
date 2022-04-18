@@ -2,8 +2,8 @@ use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    message_binding::MessageBinding, ChannelBinding, CorrelationId, Message, MessageTrait,
-    OperationBinding, OperationTrait, Parameter, ReferenceOr, Schema, SecurityScheme,
+    message_binding::MessageBinding, Channel, ChannelBinding, CorrelationId, Message, MessageTrait,
+    OperationBinding, OperationTrait, Parameter, ReferenceOr, Schema, SecurityScheme, Server,
     ServerBinding,
 };
 
@@ -212,10 +212,16 @@ pub struct Components {
     /// [Message Trait Objects][crate::MessageTrait].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub message_traits: IndexMap<String, ReferenceOr<MessageTrait>>,
+    /// An object to hold reusable [Server Objects][crate::Server].
+    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
+    pub servers: IndexMap<String, ReferenceOr<Server>>,
     /// An object to hold reusable
     /// [Server Bindings Objects][crate::ServerBinding].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub server_bindings: IndexMap<String, ReferenceOr<ServerBinding>>,
+    /// An object to hold reusable [Channel Item Objects][crate::Channel].
+    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
+    pub channels: IndexMap<String, Channel>,
     /// An object to hold reusable
     /// [Channel Bindings Objects][crate::ChannelBinding].
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
@@ -229,7 +235,7 @@ pub struct Components {
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
     pub message_bindings: IndexMap<String, ReferenceOr<MessageBinding>>,
     /// This object can be extended with
-    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.2.0#specificationExtensions).
+    /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
