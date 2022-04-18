@@ -1,7 +1,7 @@
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 
-use crate::{Channel, Components, ExternalDocumentation, Info, Server, Tag};
+use crate::{Channel, Components, ExternalDocumentation, Info, ReferenceOr, Server, Tag};
 
 /// This is the root document object for the API specification.
 /// It combines resource listing and API declaration together into one document.
@@ -98,7 +98,7 @@ pub struct AsyncAPI {
     ///     protocolVersion: '1.0.0'
     /// ```
     #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub servers: IndexMap<String, Server>,
+    pub servers: IndexMap<String, ReferenceOr<Server>>,
     /// Default content type to use when encoding/decoding a message's payload.
     /// A string representing the default content type to use when encoding/decoding a
     /// message's payload. The value MUST be a specific media type (e.g. `application/json`).

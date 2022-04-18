@@ -469,3 +469,26 @@ pub struct OAuthFlowAuthorizationCode {
     #[serde(flatten)]
     pub extensions: IndexMap<String, serde_json::Value>,
 }
+
+#[test]
+fn test_deserialize_security_scheme() {
+    use crate::ReferenceOr;
+
+    let example = r#"
+    type: apiKey
+    in: user
+    description: Provide your API key as the user and leave the password empty.
+    "#;
+    let asyncapi: ReferenceOr<SecurityScheme> = serde_yaml::from_str(example)
+        .expect(&format!("Could not deserialize api key security scheme"));
+    assert_eq!(
+        ReferenceOr::Item(SecurityScheme::ApiKey {
+            location: "user".to_string(),
+            description: Some(
+                "Provide your API key as the user and leave the password empty.".to_string(),
+            ),
+            extensions: Default::default(),
+        }),
+        asyncapi
+    );
+}

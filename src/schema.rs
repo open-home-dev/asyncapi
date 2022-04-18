@@ -12,8 +12,11 @@ pub struct SchemaData {
     pub read_only: bool,
     #[serde(default, skip_serializing_if = "Clone::clone")]
     pub write_only: bool,
+    /// Specifies that a schema is deprecated and SHOULD be transitioned out
+    /// of usage. Default value is `false`.
     #[serde(default, skip_serializing_if = "Clone::clone")]
     pub deprecated: bool,
+    /// Additional external documentation for this schema.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub external_docs: Option<ExternalDocumentation>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -22,8 +25,15 @@ pub struct SchemaData {
     pub title: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// Adds support for polymorphism. The discriminator is the schema property
+    /// name that is used to differentiate between other schema that inherit
+    /// this schema. The property name used MUST be defined at this schema and
+    /// it MUST be in the `required` property list. When used, the value MUST be
+    ///  the name of this schema or any schema that inherits it. See
+    /// [Composition and Inheritance](https://www.asyncapi.com/docs/specifications/v2.3.0#schemaComposition)
+    /// for more details.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub discriminator: Option<Discriminator>,
+    pub discriminator: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub default: Option<serde_json::Value>,
 }

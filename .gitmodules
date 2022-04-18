@@ -1,3 +1,6 @@
 [submodule "fixtures/tck"]
 	path = fixtures/tck
 	url = https://github.com/asyncapi/tck
+[submodule "fixtures/spec"]
+	path = fixtures/spec
+	url = https://github.com/asyncapi/spec.git
