@@ -1,4 +1,5 @@
-# AsyncAPI
+# AsyncAPI 
+[![Rust](https://github.com/open-home-dev/asyncapi/actions/workflows/rust.yml/badge.svg?branch=master)](https://github.com/open-home-dev/asyncapi/actions/workflows/rust.yml)
 
 This crate aims to provide data structures that represent the [AsyncAPI v 2.3.0 specification](https://www.asyncapi.com/docs/specifications/v2.3.0).
 
