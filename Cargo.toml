@@ -1,20 +1,20 @@
 [package]
 name = "asyncapi"
 version = "0.2.0"
-edition = "2018"
+edition = "2021"
 
-authors = ["JP Stauffert"]
+authors = ["JP Stauffert","Kylian Lichtensteiger <ce76e2af@srylax.dev>"]
 license = "MIT OR Apache-2.0"
-keywords = ["asyncapi"]
-homepage = "https://gitlab.com/Tinted/asyncapi"
-repository = "https://gitlab.com/Tinted/asyncapi"
+keywords = ["asyncapi","async api"]
+homepage = "https://github.com/open-home-dev/asyncapi"
+repository = "https://github.com/open-home-dev/asyncapi"
 description = "This crate aims to provide data structures that represent the AsyncAPI specification easily deserializable with serde."
-readme = "Readme.md"
+readme = "README.md"
 
 [dependencies]
 serde = {version = "1.0.130", features = ["derive"]}
 serde_json = "1.0.67"
-serde_yaml = "0.8.20"
+serde_yaml = "0.9.21"
 indexmap = { version = "1.8.1", features = ["serde-1"] }
 
 [workspace]
