@@ -1,4 +1,3 @@
 /target
 Cargo.lock
-/tests/tck.rs
-/tests/spec-examples.rs
+.idea
