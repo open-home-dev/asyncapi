@@ -19,4 +19,4 @@ jobs:
       - name: Run tests
         run: cargo test --verbose
       - name: Run tests with feature utoipa
-        run: cargo test --feature utoipa --doc --verbose
+        run: cargo test --features utoipa --doc --verbose
