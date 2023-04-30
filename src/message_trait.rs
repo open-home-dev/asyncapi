@@ -1,4 +1,4 @@
-use indexmap::IndexMap;
+use std::collections::BTreeMap;
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -81,7 +81,7 @@ pub struct MessageTrait {
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 /// Message Example Object represents an example of a
@@ -126,8 +126,8 @@ pub struct MessageTrait {
 pub struct MessageExample {
     /// The value of this field MUST validate against the
     /// [Message Object's][crate::Message] headers field.
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub headers: IndexMap<String, serde_json::Value>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub headers: BTreeMap<String, serde_json::Value>,
     /// The value of this field MUST validate against the
     /// [Message Object's][crate::Message] payload field.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -141,5 +141,5 @@ pub struct MessageExample {
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }

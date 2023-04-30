@@ -1,4 +1,4 @@
-use indexmap::IndexMap;
+use std::collections::BTreeMap;
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -153,8 +153,8 @@ pub struct Channel {
     ///   subscribe:
     ///     $ref: "#/components/messages/userSignedUp"
     /// ```
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub parameters: IndexMap<String, ReferenceOr<Parameter>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub parameters: BTreeMap<String, ReferenceOr<Parameter>>,
     /// A map where the keys describe the name of the protocol and the values
     /// describe protocol-specific definitions for the channel.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -162,7 +162,7 @@ pub struct Channel {
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 /// Describes a publish or a subscribe operation. This provides a place to document how
@@ -289,12 +289,12 @@ pub struct Operation {
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(untagged)]
 pub enum OperationMessageType {
-    Map(IndexMap<String, ReferenceOr<Message>>),
+    Map(BTreeMap<String, ReferenceOr<Message>>),
     Single(ReferenceOr<Message>),
 }

@@ -29,6 +29,7 @@ mod server;
 pub mod server_binding;
 mod tag;
 mod variant_or;
+mod discriminator;
 
 pub use api::AsyncAPI;
 pub use channel::{Channel, Operation, OperationMessageType};

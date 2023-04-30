@@ -1,4 +1,4 @@
-use indexmap::IndexMap;
+use std::collections::BTreeMap;
 use serde::{Deserialize, Serialize};
 
 use crate::{Channel, Components, ExternalDocumentation, Info, ReferenceOr, Server, Tag};
@@ -97,8 +97,8 @@ pub struct AsyncAPI {
     ///     protocol: kafka
     ///     protocolVersion: '1.0.0'
     /// ```
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub servers: IndexMap<String, ReferenceOr<Server>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub servers: BTreeMap<String, ReferenceOr<Server>>,
     /// Default content type to use when encoding/decoding a message's payload.
     /// A string representing the default content type to use when encoding/decoding a
     /// message's payload. The value MUST be a specific media type (e.g. `application/json`).
@@ -150,7 +150,7 @@ pub struct AsyncAPI {
     ///   subscribe:
     ///     $ref: "#/components/messages/userSignedUp"
     /// ```
-    pub channels: IndexMap<String, Channel>,
+    pub channels: BTreeMap<String, Channel>,
     /// An element to hold various schemas for the specification.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub components: Option<Components>,
@@ -164,5 +164,5 @@ pub struct AsyncAPI {
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }

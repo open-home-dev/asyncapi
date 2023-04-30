@@ -1,5 +1,5 @@
+use std::collections::BTreeMap;
 use crate::*;
-use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 
 /// Allows adding meta data to a single tag.
@@ -30,5 +30,5 @@ pub struct Tag {
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }

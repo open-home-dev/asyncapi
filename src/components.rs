@@ -1,4 +1,4 @@
-use indexmap::IndexMap;
+use std::collections::BTreeMap;
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -186,56 +186,56 @@ use crate::{
 pub struct Components {
     /// An object to hold reusable
     /// [Schema Objects][crate::Schema].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub schemas: IndexMap<String, ReferenceOr<Schema>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub schemas: BTreeMap<String, ReferenceOr<Schema>>,
     /// An object to hold reusable
     /// [Message Objects][crate::Message].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub messages: IndexMap<String, ReferenceOr<Message>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub messages: BTreeMap<String, ReferenceOr<Message>>,
     /// An object to hold reusable
     /// [Security Scheme Objects][crate::SecurityScheme].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub security_schemes: IndexMap<String, ReferenceOr<SecurityScheme>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub security_schemes: BTreeMap<String, ReferenceOr<SecurityScheme>>,
     /// An object to hold reusable
     /// [Parameter Objects][crate::Parameter].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub parameters: IndexMap<String, ReferenceOr<Parameter>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub parameters: BTreeMap<String, ReferenceOr<Parameter>>,
     /// An object to hold reusable
     /// [Correlation ID Objects][crate::CorrelationId].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub correlation_ids: IndexMap<String, ReferenceOr<CorrelationId>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub correlation_ids: BTreeMap<String, ReferenceOr<CorrelationId>>,
     /// An object to hold reusable
     /// [Operation Trait Objects][crate::OperationTrait].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub operation_traits: IndexMap<String, ReferenceOr<OperationTrait>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub operation_traits: BTreeMap<String, ReferenceOr<OperationTrait>>,
     /// An object to hold reusable
     /// [Message Trait Objects][crate::MessageTrait].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub message_traits: IndexMap<String, ReferenceOr<MessageTrait>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub message_traits: BTreeMap<String, ReferenceOr<MessageTrait>>,
     /// An object to hold reusable [Server Objects][crate::Server].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub servers: IndexMap<String, ReferenceOr<Server>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub servers: BTreeMap<String, ReferenceOr<Server>>,
     /// An object to hold reusable
     /// [Server Bindings Objects][crate::ServerBinding].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub server_bindings: IndexMap<String, ReferenceOr<ServerBinding>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub server_bindings: BTreeMap<String, ReferenceOr<ServerBinding>>,
     /// An object to hold reusable [Channel Item Objects][crate::Channel].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub channels: IndexMap<String, Channel>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub channels: BTreeMap<String, Channel>,
     /// An object to hold reusable
     /// [Channel Bindings Objects][crate::ChannelBinding].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub channel_bindings: IndexMap<String, ReferenceOr<ChannelBinding>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub channel_bindings: BTreeMap<String, ReferenceOr<ChannelBinding>>,
     /// An object to hold reusable
     /// [Operation Bindings Objects][crate::OperationBinding].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub operation_bindings: IndexMap<String, ReferenceOr<OperationBinding>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub operation_bindings: BTreeMap<String, ReferenceOr<OperationBinding>>,
     /// An object to hold reusable
     /// [Message Bindings Objects][crate::MessageBinding].
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub message_bindings: IndexMap<String, ReferenceOr<MessageBinding>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub message_bindings: BTreeMap<String, ReferenceOr<MessageBinding>>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
