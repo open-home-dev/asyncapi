@@ -1,7 +1,7 @@
-use std::collections::BTreeMap;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
-use crate::{ReferenceOr, ServerBinding};
+use crate::{RefOr, ServerBinding};
 
 /// An object representing a message broker, a server or any other kind of
 /// computer program capable of sending and/or receiving data. This object is
@@ -162,7 +162,7 @@ pub struct Server {
     /// A map where the keys describe the name of the protocol and the values
     /// describe protocol-specific definitions for the server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bindings: Option<ReferenceOr<ServerBinding>>,
+    pub bindings: Option<RefOr<ServerBinding>>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]

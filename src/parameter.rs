@@ -1,7 +1,7 @@
-use std::collections::BTreeMap;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
-use crate::{ReferenceOr, Schema};
+use crate::{RefOr, Schema};
 
 /// Describes a parameter included in a channel name.
 ///
@@ -47,7 +47,7 @@ pub struct Parameter {
     pub description: Option<String>,
     /// Definition of the parameter.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub schema: Option<ReferenceOr<Schema>>,
+    pub schema: Option<RefOr<Schema>>,
     /// A [runtime expression](https://www.asyncapi.com/docs/specifications/v2.3.0#runtimeExpression)
     /// that specifies the location of the parameter value.
     /// Even when a definition for the target field exists,

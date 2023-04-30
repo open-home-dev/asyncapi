@@ -1,7 +1,7 @@
-use std::collections::BTreeMap;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
-use crate::{Channel, Components, ExternalDocumentation, Info, ReferenceOr, Server, Tag};
+use crate::{Channel, Components, ExternalDocumentation, Info, RefOr, Server, Tag};
 
 /// This is the root document object for the API specification.
 /// It combines resource listing and API declaration together into one document.
@@ -98,7 +98,7 @@ pub struct AsyncAPI {
     ///     protocolVersion: '1.0.0'
     /// ```
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
-    pub servers: BTreeMap<String, ReferenceOr<Server>>,
+    pub servers: BTreeMap<String, RefOr<Server>>,
     /// Default content type to use when encoding/decoding a message's payload.
     /// A string representing the default content type to use when encoding/decoding a
     /// message's payload. The value MUST be a specific media type (e.g. `application/json`).

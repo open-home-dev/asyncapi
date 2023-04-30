@@ -51,7 +51,7 @@ pub use operation_binding::OperationBinding;
 pub use operation_trait::OperationTrait;
 pub use parameter::Parameter;
 #[cfg(not(feature = "openapi-schema"))]
-pub use reference::ReferenceOr;
+pub use reference::RefOr;
 pub use schema::Schema;
 pub use security_scheme::SecurityScheme;
 pub use server::{SecurityRequirement, Server, ServerVariable};
