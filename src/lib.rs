@@ -5,7 +5,7 @@ mod components;
 mod correlation_id;
 mod example;
 mod external_documentation;
-#[cfg(not(feature = "openapi-info"))]
+#[cfg(not(feature = "utoipa-info"))]
 mod info;
 mod message;
 pub mod message_binding;
@@ -19,7 +19,7 @@ mod reference;
 pub mod schema;
 #[cfg(feature = "utoipa-schema")]
 pub mod schema {
-    pub use utoipa::openapi::{Ref, RefOr, Schema};
+    pub use utoipa::openapi::Schema;
 }
 mod discriminator;
 mod security_scheme;
@@ -40,13 +40,11 @@ pub use info::{Contact, Info, License};
 pub use message::Message;
 pub use message_binding::MessageBinding;
 pub use message_trait::MessageTrait;
-#[cfg(feature = "openapi-schema")]
-pub use openapiv3::ReferenceOr;
-#[cfg(feature = "openapi-info")]
-pub use openapiv3::{Contact, Info, License};
 pub use operation_binding::OperationBinding;
 pub use operation_trait::OperationTrait;
 pub use parameter::Parameter;
+#[cfg(not(feature = "utoipa-schema"))]
+pub use reference::Ref;
 #[cfg(not(feature = "utoipa-schema"))]
 pub use reference::RefOr;
 pub use schema::Schema;
@@ -54,4 +52,10 @@ pub use security_scheme::SecurityScheme;
 pub use server::{SecurityRequirement, Server, ServerVariable};
 pub use server_binding::ServerBinding;
 pub use tag::Tag;
+#[cfg(feature = "utoipa-schema")]
+pub use utoipa::openapi::Ref;
+#[cfg(feature = "utoipa-schema")]
+pub use utoipa::openapi::RefOr;
+#[cfg(feature = "utoipa-info")]
+pub use utoipa::openapi::{Contact, Info, License};
 pub use variant_or::{VariantOrUnknown, VariantOrUnknownOrEmpty};
