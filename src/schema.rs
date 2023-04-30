@@ -6,15 +6,15 @@ use std::collections::BTreeMap;
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct SchemaData {
-    #[serde(default, skip_serializing_if = "Clone::clone")]
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub nullable: bool,
-    #[serde(default, skip_serializing_if = "Clone::clone")]
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub read_only: bool,
-    #[serde(default, skip_serializing_if = "Clone::clone")]
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub write_only: bool,
     /// Specifies that a schema is deprecated and SHOULD be transitioned out
     /// of usage. Default value is `false`.
-    #[serde(default, skip_serializing_if = "Clone::clone")]
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub deprecated: bool,
     /// Additional external documentation for this schema.
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -18,3 +18,5 @@ jobs:
         run: cargo run -p generate-tests --verbose
       - name: Run tests
         run: cargo test --verbose
+      - name: Run tests with feature utoipa
+        run: cargo test --feature utoipa --doc --verbose

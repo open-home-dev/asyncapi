@@ -214,6 +214,7 @@ pub struct Message {
     pub external_docs: Option<ExternalDocumentation>,
     /// A map where the keys describe the name of
     /// the protocol and the values describe protocol-specific definitions for the message.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub bindings: Option<RefOr<MessageBinding>>,
     /// An array with examples of valid message objects.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -227,6 +228,6 @@ pub struct Message {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(untagged)]
 pub enum Payload {
-    Schema(Schema),
+    RefOr(RefOr<Schema>),
     Any(serde_json::Value),
 }
