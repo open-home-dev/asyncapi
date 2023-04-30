@@ -13,23 +13,20 @@ mod message_trait;
 pub mod operation_binding;
 mod operation_trait;
 mod parameter;
-#[cfg(not(feature = "openapi-schema"))]
+#[cfg(not(feature = "utoipa-schema"))]
 mod reference;
-#[cfg(not(feature = "openapi-schema"))]
+#[cfg(not(feature = "utoipa-schema"))]
 pub mod schema;
-#[cfg(feature = "openapi-schema")]
+#[cfg(feature = "utoipa-schema")]
 pub mod schema {
-    pub use openapiv3::{
-        AdditionalProperties, AnySchema, ArrayType, IntegerFormat, IntegerType, NumberFormat,
-        NumberType, ObjectType, Schema, SchemaData, SchemaKind, StringFormat, StringType, Type,
-    };
+    pub use utoipa::openapi::{Ref, RefOr, Schema};
 }
+mod discriminator;
 mod security_scheme;
 mod server;
 pub mod server_binding;
 mod tag;
 mod variant_or;
-mod discriminator;
 
 pub use api::AsyncAPI;
 pub use channel::{Channel, Operation, OperationMessageType};
@@ -38,7 +35,7 @@ pub use components::Components;
 pub use correlation_id::CorrelationId;
 pub use example::Example;
 pub use external_documentation::ExternalDocumentation;
-#[cfg(not(feature = "openapi-info"))]
+#[cfg(not(feature = "utoipa-info"))]
 pub use info::{Contact, Info, License};
 pub use message::Message;
 pub use message_binding::MessageBinding;
@@ -50,7 +47,7 @@ pub use openapiv3::{Contact, Info, License};
 pub use operation_binding::OperationBinding;
 pub use operation_trait::OperationTrait;
 pub use parameter::Parameter;
-#[cfg(not(feature = "openapi-schema"))]
+#[cfg(not(feature = "utoipa-schema"))]
 pub use reference::RefOr;
 pub use schema::Schema;
 pub use security_scheme::SecurityScheme;

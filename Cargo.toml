@@ -15,11 +15,11 @@ readme = "README.md"
 serde = {version = "1.0.130", features = ["derive"]}
 serde_json = "1.0.67"
 serde_yaml = "0.9.21"
-openapiv3 = { version = "1.0.2", optional = true }
+utoipa = { version = "3.3.0", optional = true }
 
 [features]
-openapi-schema = ["openapiv3"]
-openapi-info = ["openapiv3"]
+utoipa-schema = ["utoipa"]
+utoipa-info = ["utoipa"]
 
 [workspace]
 members = [
