@@ -1,7 +1,7 @@
-use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
-use crate::{ExternalDocumentation, OperationBinding, ReferenceOr, Tag};
+use crate::{ExternalDocumentation, OperationBinding, RefOr, Tag};
 
 /// Describes a trait that MAY be applied to an
 /// [Operation Object][crate::Operation].
@@ -56,9 +56,9 @@ pub struct OperationTrait {
     /// A map where the keys describe the name of the protocol and the values describe
     /// protocol-specific definitions for the operation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bindings: Option<ReferenceOr<OperationBinding>>,
+    pub bindings: Option<RefOr<OperationBinding>>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }

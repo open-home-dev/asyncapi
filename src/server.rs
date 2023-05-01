@@ -1,7 +1,7 @@
-use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
-use crate::{ReferenceOr, ServerBinding};
+use crate::{RefOr, ServerBinding};
 
 /// An object representing a message broker, a server or any other kind of
 /// computer program capable of sending and/or receiving data. This object is
@@ -151,8 +151,8 @@ pub struct Server {
     pub description: Option<String>,
     /// A map between a variable name and its value. The value is used
     /// for substitution in the server's URL template.
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub variables: IndexMap<String, ServerVariable>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub variables: BTreeMap<String, ServerVariable>,
     /// A declaration of which security mechanisms can be used with this
     /// server. The list of values includes alternative security requirement
     /// objects that can be used. Only one of the security requirement objects
@@ -162,11 +162,11 @@ pub struct Server {
     /// A map where the keys describe the name of the protocol and the values
     /// describe protocol-specific definitions for the server.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bindings: Option<ReferenceOr<ServerBinding>>,
+    pub bindings: Option<RefOr<ServerBinding>>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 /// An object representing a Server Variable for server URL
@@ -193,7 +193,7 @@ pub struct ServerVariable {
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 /// Lists the required security schemes to execute this operation. The name
@@ -257,5 +257,5 @@ pub struct SecurityRequirement {
     /// needed, the list can be empty. For other security scheme types, the
     /// array MUST be empty.
     #[serde(flatten)]
-    pub values: IndexMap<String, Vec<String>>,
+    pub values: BTreeMap<String, Vec<String>>,
 }

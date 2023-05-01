@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
 #[serde(untagged)]
-pub enum ReferenceOr<T> {
+pub enum RefOr<T> {
     /// A simple object to allow referencing other components in the specification,
     /// internally and externally.
     ///
@@ -17,29 +17,33 @@ pub enum ReferenceOr<T> {
     ///
     /// For this specification, reference resolution is done as defined by the
     /// JSON Reference specification and not by the JSON Schema specification.
-    Reference {
-        #[serde(rename = "$ref")]
-        reference: String,
-    },
-    Item(T),
+    Ref(Ref),
+    T(T),
 }
 
-impl<T> ReferenceOr<T> {
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+pub struct Ref {
+    /// Reference location of the actual component.
+    #[serde(rename = "$ref")]
+    pub ref_location: String,
+}
+
+impl<T> RefOr<T> {
     pub fn ref_(r: &str) -> Self {
-        ReferenceOr::Reference {
-            reference: r.to_owned(),
-        }
+        RefOr::Ref(Ref {
+            ref_location: r.to_owned(),
+        })
     }
-    pub fn boxed_item(item: T) -> ReferenceOr<Box<T>> {
-        ReferenceOr::Item(Box::new(item))
+    pub fn boxed_item(item: T) -> RefOr<Box<T>> {
+        RefOr::T(Box::new(item))
     }
 }
 
-impl<T> ReferenceOr<Box<T>> {
-    pub fn unbox(self) -> ReferenceOr<T> {
+impl<T> RefOr<Box<T>> {
+    pub fn unbox(self) -> RefOr<T> {
         match self {
-            ReferenceOr::Reference { reference } => ReferenceOr::Reference { reference },
-            ReferenceOr::Item(boxed) => ReferenceOr::Item(*boxed),
+            RefOr::Ref(reference) => RefOr::Ref(reference),
+            RefOr::T(boxed) => RefOr::T(*boxed),
         }
     }
 }

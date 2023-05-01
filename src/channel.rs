@@ -1,9 +1,9 @@
-use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
 use crate::{
     ChannelBinding, ExternalDocumentation, Message, OperationBinding, OperationTrait, Parameter,
-    ReferenceOr, Tag,
+    RefOr, Tag,
 };
 
 /// Describes the operations available on a single channel.
@@ -153,16 +153,16 @@ pub struct Channel {
     ///   subscribe:
     ///     $ref: "#/components/messages/userSignedUp"
     /// ```
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub parameters: IndexMap<String, ReferenceOr<Parameter>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub parameters: BTreeMap<String, RefOr<Parameter>>,
     /// A map where the keys describe the name of the protocol and the values
     /// describe protocol-specific definitions for the channel.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bindings: Option<ReferenceOr<ChannelBinding>>,
+    pub bindings: Option<RefOr<ChannelBinding>>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 /// Describes a publish or a subscribe operation. This provides a place to document how
@@ -274,13 +274,13 @@ pub struct Operation {
     /// A map where the keys describe the name of the protocol and the
     /// values describe protocol-specific definitions for the operation.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bindings: Option<ReferenceOr<OperationBinding>>,
+    pub bindings: Option<RefOr<OperationBinding>>,
     /// A list of traits to apply to the operation object.
     /// Traits MUST be merged into the operation object using the
     /// [JSON Merge Patch](https://tools.ietf.org/html/rfc7386)
     /// algorithm in the same order they are defined here.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub traits: Vec<ReferenceOr<OperationTrait>>,
+    pub traits: Vec<RefOr<OperationTrait>>,
     /// A definition of the message that will be published or received on
     /// this channel. `oneOf` is allowed here to specify multiple messages, however,
     /// **a message MUST be valid only against one of the referenced message objects.**
@@ -289,12 +289,12 @@ pub struct Operation {
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(untagged)]
 pub enum OperationMessageType {
-    Map(IndexMap<String, ReferenceOr<Message>>),
-    Single(ReferenceOr<Message>),
+    Map(BTreeMap<String, RefOr<Message>>),
+    Single(RefOr<Message>),
 }

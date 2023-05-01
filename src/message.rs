@@ -1,9 +1,7 @@
-use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
-use crate::{
-    CorrelationId, Example, ExternalDocumentation, MessageBinding, ReferenceOr, Schema, Tag,
-};
+use crate::{CorrelationId, Example, ExternalDocumentation, MessageBinding, RefOr, Schema, Tag};
 
 /// Describes a message received on a given channel and operation.
 ///
@@ -172,7 +170,7 @@ pub struct Message {
     /// Schema definition of the application headers.
     /// Schema MUST be of type "object". It **MUST NOT** define the protocol headers.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub headers: Option<ReferenceOr<Schema>>,
+    pub headers: Option<RefOr<Schema>>,
     /// Definition of the message payload. It can be of any type
     /// but defaults to [Schema object][crate::Schema]. It must match the schema format,
     /// including encoding type - e.g Avro should be inlined as either
@@ -181,7 +179,7 @@ pub struct Message {
     pub payload: Option<Payload>,
     /// Definition of the correlation ID used for message tracing or matching.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub correlation_id: Option<ReferenceOr<CorrelationId>>,
+    pub correlation_id: Option<RefOr<CorrelationId>>,
     /// A string containing the name of the schema
     /// format/language used to define the message payload.
     /// If omitted, implementations should parse the payload as a
@@ -216,19 +214,20 @@ pub struct Message {
     pub external_docs: Option<ExternalDocumentation>,
     /// A map where the keys describe the name of
     /// the protocol and the values describe protocol-specific definitions for the message.
-    pub bindings: Option<ReferenceOr<MessageBinding>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub bindings: Option<RefOr<MessageBinding>>,
     /// An array with examples of valid message objects.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub examples: Vec<Example>, // TODO try to parse better
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(untagged)]
 pub enum Payload {
-    Schema(Schema),
+    RefOr(RefOr<Schema>),
     Any(serde_json::Value),
 }

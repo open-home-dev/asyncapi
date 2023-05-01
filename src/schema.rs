@@ -1,20 +1,20 @@
 use crate::*;
-use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 use std::clone::Clone;
+use std::collections::BTreeMap;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct SchemaData {
-    #[serde(default, skip_serializing_if = "Clone::clone")]
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub nullable: bool,
-    #[serde(default, skip_serializing_if = "Clone::clone")]
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub read_only: bool,
-    #[serde(default, skip_serializing_if = "Clone::clone")]
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub write_only: bool,
     /// Specifies that a schema is deprecated and SHOULD be transitioned out
     /// of usage. Default value is `false`.
-    #[serde(default, skip_serializing_if = "Clone::clone")]
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub deprecated: bool,
     /// Additional external documentation for this schema.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -52,15 +52,15 @@ pub enum SchemaKind {
     Type(Type),
     OneOf {
         #[serde(rename = "oneOf")]
-        one_of: Vec<ReferenceOr<Schema>>,
+        one_of: Vec<RefOr<Schema>>,
     },
     AllOf {
         #[serde(rename = "allOf")]
-        all_of: Vec<ReferenceOr<Schema>>,
+        all_of: Vec<RefOr<Schema>>,
     },
     AnyOf {
         #[serde(rename = "anyOf")]
-        any_of: Vec<ReferenceOr<Schema>>,
+        any_of: Vec<RefOr<Schema>>,
     },
     Any(AnySchema),
 }
@@ -80,7 +80,7 @@ pub enum Type {
 #[serde(untagged)]
 pub enum AdditionalProperties {
     Any(bool),
-    Schema(Box<ReferenceOr<Schema>>),
+    Schema(Box<RefOr<Schema>>),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
@@ -98,8 +98,8 @@ pub struct AnySchema {
     pub minimum: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub maximum: Option<f64>,
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub properties: IndexMap<String, ReferenceOr<Box<Schema>>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub properties: BTreeMap<String, RefOr<Box<Schema>>>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub required: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -109,7 +109,7 @@ pub struct AnySchema {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max_properties: Option<usize>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub items: Option<ReferenceOr<Box<Schema>>>,
+    pub items: Option<RefOr<Box<Schema>>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub min_items: Option<usize>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -176,8 +176,8 @@ pub struct IntegerType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct ObjectType {
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub properties: IndexMap<String, ReferenceOr<Box<Schema>>>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub properties: BTreeMap<String, RefOr<Box<Schema>>>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub required: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -192,7 +192,7 @@ pub struct ObjectType {
 #[serde(rename_all = "camelCase")]
 pub struct ArrayType {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub items: Option<ReferenceOr<Box<Schema>>>,
+    pub items: Option<RefOr<Box<Schema>>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub min_items: Option<usize>,
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -1,5 +1,5 @@
-use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
 /// Defines a security scheme that can be used by the operations. Supported schemes are:
 ///
@@ -153,7 +153,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     #[serde(rename = "apiKey")]
     ApiKey {
@@ -169,7 +169,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     X509 {
         /// A short description for security scheme.
@@ -180,7 +180,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     #[serde(rename = "symmetricEncryption")]
     SymmetricEncryption {
@@ -192,7 +192,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     #[serde(rename = "asymmetricEncryption")]
     AsymmetricEncryption {
@@ -204,7 +204,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     #[serde(rename = "httpApiKey")]
     HttpApiKey {
@@ -223,7 +223,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     #[serde(rename = "http", rename_all = "camelCase")]
     Http {
@@ -244,7 +244,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     /// # Examples
     /// ```json
@@ -298,7 +298,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     #[serde(rename = "openIdConnect", rename_all = "camelCase")]
     OpenIdConnect {
@@ -313,7 +313,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     #[serde(rename = "plain")]
     Plain {
@@ -325,7 +325,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     #[serde(rename = "scramSha256")]
     ScramSha256 {
@@ -337,7 +337,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     #[serde(rename = "scramSha512")]
     ScramSha512 {
@@ -349,7 +349,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
     #[serde(rename = "gssapi")]
     Gssapi {
@@ -361,7 +361,7 @@ pub enum SecurityScheme {
         /// This object MAY be extended with
         /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
         #[serde(flatten)]
-        extensions: IndexMap<String, serde_json::Value>,
+        extensions: BTreeMap<String, serde_json::Value>,
     },
 }
 
@@ -384,7 +384,7 @@ pub struct OAuthFlows {
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 /// Configuration details for a supported OAuth Flow
@@ -400,11 +400,11 @@ pub struct OAuthFlowImplicit {
     pub refresh_url: Option<String>,
     /// **REQUIRED**. The available scopes for the OAuth2 security scheme.
     /// A map between the scope name and a short description for it.
-    pub scopes: IndexMap<String, String>,
+    pub scopes: BTreeMap<String, String>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 /// Configuration details for a supported OAuth Flow
@@ -420,11 +420,11 @@ pub struct OAuthFlowPassword {
     pub refresh_url: Option<String>,
     /// **REQUIRED**. The available scopes for the OAuth2 security scheme.
     /// A map between the scope name and a short description for it.
-    pub scopes: IndexMap<String, String>,
+    pub scopes: BTreeMap<String, String>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 /// Configuration details for a supported OAuth Flow
@@ -440,11 +440,11 @@ pub struct OAuthFlowClientCredentials {
     pub refresh_url: Option<String>,
     /// **REQUIRED**. The available scopes for the OAuth2 security scheme.
     /// A map between the scope name and a short description for it.
-    pub scopes: IndexMap<String, String>,
+    pub scopes: BTreeMap<String, String>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 /// Configuration details for a supported OAuth Flow
@@ -463,26 +463,26 @@ pub struct OAuthFlowAuthorizationCode {
     pub refresh_url: Option<String>,
     /// **REQUIRED**. The available scopes for the OAuth2 security scheme.
     /// A map between the scope name and a short description for it.
-    pub scopes: IndexMap<String, String>,
+    pub scopes: BTreeMap<String, String>,
     /// This object MAY be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 #[test]
 fn test_deserialize_security_scheme() {
-    use crate::ReferenceOr;
+    use crate::RefOr;
 
     let example = r#"
     type: apiKey
     in: user
     description: Provide your API key as the user and leave the password empty.
     "#;
-    let asyncapi: ReferenceOr<SecurityScheme> = serde_yaml::from_str(example)
+    let asyncapi: RefOr<SecurityScheme> = serde_yaml::from_str(example)
         .expect(&format!("Could not deserialize api key security scheme"));
     assert_eq!(
-        ReferenceOr::Item(SecurityScheme::ApiKey {
+        RefOr::T(SecurityScheme::ApiKey {
             location: "user".to_string(),
             description: Some(
                 "Provide your API key as the user and leave the password empty.".to_string(),

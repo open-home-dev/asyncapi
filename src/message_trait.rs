@@ -1,8 +1,8 @@
-use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
 
 use crate::{
-    message_binding::MessageBinding, CorrelationId, ExternalDocumentation, ReferenceOr, Schema, Tag,
+    message_binding::MessageBinding, CorrelationId, ExternalDocumentation, RefOr, Schema, Tag,
 };
 
 /// Describes a trait that MAY be applied to a
@@ -34,10 +34,10 @@ pub struct MessageTrait {
     /// Schema MUST be of type "object".
     /// It **MUST NOT** define the protocol headers.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub headers: Option<ReferenceOr<Schema>>,
+    pub headers: Option<RefOr<Schema>>,
     /// Definition of the correlation ID used for message tracing or matching.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub correlation_id: Option<ReferenceOr<CorrelationId>>,
+    pub correlation_id: Option<RefOr<CorrelationId>>,
     /// A string containing the name of the schema format/language used to define
     /// the message payload. If omitted, implementations should parse the payload as a
     /// [Schema object][crate::Schema].
@@ -74,14 +74,14 @@ pub struct MessageTrait {
     /// A map where the keys describe the name of the protocol
     /// and the values describe protocol-specific definitions for the message.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bindings: Option<ReferenceOr<MessageBinding>>,
+    pub bindings: Option<RefOr<MessageBinding>>,
     /// List of examples.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub examples: Vec<MessageExample>,
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }
 
 /// Message Example Object represents an example of a
@@ -126,8 +126,8 @@ pub struct MessageTrait {
 pub struct MessageExample {
     /// The value of this field MUST validate against the
     /// [Message Object's][crate::Message] headers field.
-    #[serde(default, skip_serializing_if = "IndexMap::is_empty")]
-    pub headers: IndexMap<String, serde_json::Value>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub headers: BTreeMap<String, serde_json::Value>,
     /// The value of this field MUST validate against the
     /// [Message Object's][crate::Message] payload field.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -141,5 +141,5 @@ pub struct MessageExample {
     /// This object can be extended with
     /// [Specification Extensions](https://www.asyncapi.com/docs/specifications/v2.3.0#specificationExtensions).
     #[serde(flatten)]
-    pub extensions: IndexMap<String, serde_json::Value>,
+    pub extensions: BTreeMap<String, serde_json::Value>,
 }

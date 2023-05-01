@@ -1,0 +1,20 @@
+asyncapi: ''
+info:
+  title: ''
+  version: ''
+channels: {}
+components:
+  schemas:
+    UserSignedUp:
+      type: object
+      required:
+      - email
+      - first_name
+      - last_name
+      properties:
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
