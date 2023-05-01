@@ -10,7 +10,11 @@
 //! # #[cfg(not(feature = "utoipa"))]
 //! fn main() {
 //!     let data = include_str!("../tests/asyncapi.yml");
+//!
+//!     // Deserialize to AsyncAPI struct
 //!     let asyncapi: AsyncAPI = serde_yaml::from_str(data).expect("Could not deserialize input");
+//!
+//!     // Now serialize the struct to verify, that it remained the same
 //!     let serialized = serde_yaml::to_string(&asyncapi).expect("Could not serialize");
 //!     println!("{}", serialized);
 //! #   assert_eq!(data, serialized);
@@ -47,9 +51,12 @@
 //!
 //! # #[cfg(feature = "utoipa")]
 //! fn main() {
+//!     // OpenAPI Spec generated from utoipa
 //!     let openapi: openapi::OpenApi = ApiDoc::openapi();
+//!     // We only care about the schemas
 //!     let schemas = openapi.components.expect("Could not generate Schemas").schemas;
 //!
+//!     // Use the schemas in a empty AsyncAPI definition
 //!     let asyncapi = asyncapi::AsyncAPI {
 //!         components: Some(Components {
 //!             schemas,
@@ -57,6 +64,7 @@
 //!         }),
 //!         ..Default::default()
 //!     };
+//!
 //!     let serialized = serde_yaml::to_string(&asyncapi).expect("Could not serialize");
 //!     println!("{}", serialized);
 //!   # assert_eq!(include_str!("../tests/utoipa-asyncapi.yml"), serialized);
