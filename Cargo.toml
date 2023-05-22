@@ -3,7 +3,7 @@ name = "asyncapi"
 version = "0.2.0"
 edition = "2021"
 
-authors = ["JP Stauffert","Kylian Lichtensteiger <ce76e2af@srylax.dev>"]
+authors = ["Kylian Lichtensteiger <ce76e2af@srylax.dev>"]
 license = "MIT OR Apache-2.0"
 keywords = ["asyncapi","async api"]
 homepage = "https://github.com/open-home-dev/asyncapi"
